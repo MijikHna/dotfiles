@@ -70,11 +70,6 @@ return {
             end,
             "fallback",
           },
-          ["<C-j>"] = { "select_next" },
-          ["<C-k>"] = { "select_prev" },
-          ["<C-n>"] = { "select_next" },
-          ["<C-p>"] = { "select_prev" },
-          ["<TAB>"] = { "select_and_accept", "fallback" },
         },
         sources = function()
           local type = vim.fn.getcmdtype()
@@ -88,14 +83,17 @@ return {
           return {}
         end,
         completion = {
-          trigger = {
-            show_on_blocked_trigger_characters = {},
-            show_on_x_blocked_trigger_characters = nil, -- Inherits from top level `completion.trigger.show_on_blocked_trigger_characters` config when not set
-          },
+          trigger = { show_on_blocked_trigger_characters = {} },
+          list = { selection = { preselect = false, auto_insert = true } },
           menu = {
-            auto_show = nil, -- Inherits from top level `completion.menu.auto_show` config when not set
+            auto_show = true,
             draw = {
-              columns = { { "label", "label_description", gap = 1 } },
+              columns = {
+                { "label", "label_description", gap = 1 },
+                { "kind_icon" },
+                { "kind" },
+                { "source_name" },
+              },
             },
           },
         },
@@ -152,7 +150,7 @@ return {
             module = "blink.cmp.sources.lsp",
             enabled = true,
             max_items = 15,
-            -- min_keyword_length = 2,
+            min_keyword_length = 0,
             score_offset = 90,
           },
           path = {
@@ -192,13 +190,6 @@ return {
             min_keyword_length = 2,
             score_offset = 50,
           },
-          dadbod = {
-            name = "Dadbod",
-            enabled = true,
-            module = "vim_dadbod_completion.blink",
-            min_keyword_length = 2,
-            score_offset = 85, -- the higher the number, the higher the priority
-          },
           dap = {
             name = "dap",
             module = "blink.compat.source",
@@ -208,19 +199,11 @@ return {
             end,
             score_offset = 90,
           },
-          markdown = {
-            name = "RenderMarkdown",
-            enabled = true,
-            module = "render-markdown.integ.blink",
-            fallbacks = { "lsp" },
-          },
         },
         per_filetype = {
           ["dap-repl"] = { "dap", "lsp", "buffer", "path" },
           dapui_watches = { "dap", "lsp", "buffer", "path" },
           dapui_hover = { "dap", "lsp", "buffer", "path" },
-          sql = { "dadbod", "buffer", "lsp" },
-          markdown = { "markdown", "lsp", "buffer", "path" },
         },
       },
       signature = { enabled = true },
@@ -378,4 +361,3 @@ return {
     end,
   },
 }
-

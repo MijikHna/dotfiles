@@ -17,9 +17,6 @@ return {
     local lspconfig = require("lspconfig")
     -- local cmp_nvim_lsp = require("cmp_nvim_lsp")
 
-    local arduino_util = require("utils.arduino")
-    local qt = require("utils.qt")
-
     local textDocument = { completion = { completionItem = { snippetSupport = false } } }
     local workspace = { didChangeWatchedFiles = { dynamicRegistration = true } }
     local offsetEncoding = { "utf-16" }
@@ -32,9 +29,9 @@ return {
     -- })
 
     local capabilities = require("blink.cmp").get_lsp_capabilities({
-      workspace = workspace,
-      offsetEncoding = offsetEncoding,
-      general = general,
+      workspace,
+      offsetEncoding,
+      general,
     })
 
     -- LSP Servers
@@ -70,14 +67,6 @@ return {
       capabilities = capabilities,
     })
 
-    --[[  Java LSP:
-      1: clone repository git clone https://github.com/eclipse/eclipse.jdt.ls.git,
-      2: mvn clean verify -DskipTests=true
-      3: set JDTLS_HOME to .../eclipse.jdt.ls/org.eclipse.jdt.ls.product/target/repository
-    ]]
-    --
-    lspconfig.jdtls.setup({ capabilities = capabilities })
-
     lspconfig.cmake.setup({ capabilities = capabilities })
 
     -- JSON LSP: install json LSP npm install -g vscode-langservers-extracted
@@ -89,7 +78,24 @@ return {
     lspconfig.html.setup({ capabilities = capabilities })
 
     -- Python LSP
-    lspconfig.pyright.setup({ capabilities = capabilities })
+    lspconfig.pyright.setup({
+      root_dir = function(fname)
+        local util = require("lspconfig.util")
+        return util.root_pattern("pyproject.toml", "requirements.txt", "pyrightconfig.json", ".git")(fname)
+      end,
+      capabilities = capabilities,
+      flags = { debounce_text_changes = 500 },
+      settings = {
+        python = {
+          analysis = {
+            diagnosticMode = "openFilesOnly",
+            typeCheckingMode = "basic",
+            useLibraryCodeForTypes = false,
+            autoSearchPaths = false,
+          },
+        },
+      },
+    })
 
     -- lspconfig.basedpyright.setup({ capabilities = capabilities })
 
@@ -113,46 +119,6 @@ return {
         redhat = { telemetry = { enabled = false } },
       },
     })
-
-    -- Arduino LSP: go install github.com/arduino/arduino-language-server@latest; install arduino-cli
-    -- local fqbn = "esp8266:esp8266:d1_mini_pro"
-    lspconfig.arduino_language_server.setup({
-      -- general = { positionEncodings = { "utf-16" } },
-      -- capabilities = capabilities,
-      cmd = {
-        "arduino-language-server",
-        "-clangd",
-        "/usr/bin/clangd",
-        "-cli",
-        os.getenv("HOME") .. "/prog/arduino/arduino-cli/bin/arduino-cli",
-        "-cli-config",
-        os.getenv("HOME") .. "/.arduino15/arduino-cli.yml",
-        "-fqbn",
-        arduino_util.get_arduino_board_fqbn(),
-      },
-    })
-
-    -- Rust LSP
-    lspconfig.rust_analyzer.setup({
-      capabilities = capabilities,
-      settings = {
-        ["rust-analyzer"] = { diagnostics = { enable = true } },
-      },
-    })
-
-    lspconfig.qmlls.setup({ capabilities = capabilities, cmd = { qt.get_qmlls_path() } })
-
-    lspconfig.matlab_ls.setup({
-      settings = {
-        indexWorkspace = false,
-        installPath = "",
-        matlabConnectionTiming = "onStart",
-        telemetry = false,
-      },
-      single_file_support = true,
-    })
-
-    lspconfig.texlab.setup({ capabilities = capabilities })
 
     for type, icon in pairs({ Error = "", Warn = "", Hint = "", Info = " " }) do
       local hl = "DiagnosticSign" .. type
@@ -179,4 +145,3 @@ return {
     keymap.set("n", "gf", vim.diagnostic.open_float)
   end,
 }
-

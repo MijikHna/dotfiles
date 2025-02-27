@@ -66,6 +66,7 @@ return {
       ["pwa-node"] = { "javascript", "typescript" },
       ["pwa-chrome"] = { "javascript", "typescript" },
       cppdbg = { "cpp", "c" },
+      python = { "python", "yaml" },
     })
 
     require("nvim-dap-virtual-text").setup()
