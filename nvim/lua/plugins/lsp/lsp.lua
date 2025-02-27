@@ -32,9 +32,9 @@ return {
     -- })
 
     local capabilities = require("blink.cmp").get_lsp_capabilities({
-      workspace = workspace,
-      offsetEncoding = offsetEncoding,
-      general = general,
+      workspace,
+      offsetEncoding,
+      general,
     })
 
     -- LSP Servers
@@ -141,16 +141,6 @@ return {
     })
 
     lspconfig.qmlls.setup({ capabilities = capabilities, cmd = { qt.get_qmlls_path() } })
-
-    lspconfig.matlab_ls.setup({
-      settings = {
-        indexWorkspace = false,
-        installPath = "",
-        matlabConnectionTiming = "onStart",
-        telemetry = false,
-      },
-      single_file_support = true,
-    })
 
     lspconfig.texlab.setup({ capabilities = capabilities })
 

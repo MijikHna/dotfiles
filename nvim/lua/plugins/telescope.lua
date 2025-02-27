@@ -18,6 +18,7 @@ return {
             "node_modules/",
             "dist/",
             ".venv/",
+            ".env",
             "plugged/",
             "undodir/",
             "%.git/",
@@ -30,7 +31,7 @@ return {
             ".nuxt/",
             "%.jpg",
             "%.png",
-            "package%-lock%.json",
+            "package%-lock.json",
           },
           mappings = {
             i = {
@@ -67,27 +68,27 @@ return {
 
       local keymap = vim.keymap
       keymap.set("n", "<leader>ff", ":Telescope find_files<CR>", { desc = "[F]ind Files" })
-      keymap.set("n", "<leader>fh", ":Telescope help_tags<CR>", { desc = "[H]elp [T]ags" })
+      keymap.set("n", "<leader>fh", ":Telescope help_tags<CR>", { desc = "[F]ind [H]elp Tags" })
       keymap.set("n", "<leader>fb", ":Telescope buffers<CR>", { desc = "[B]uffers" })
       keymap.set("n", "<leader>fB", ":Telescope current_buffer_fuzzy_find<CR>", { desc = "Current [B]uffer Fuzzy" })
 
-      keymap.set("n", "<leader>fg", ":Telescope live_grep<CR>", { desc = "[G]rep Live" })
-      keymap.set("n", "<leader>fa", ":Telescope live_grep_args<CR>", { desc = "Grep Live [A]rgs" })
+      keymap.set("n", "<leader>fg", ":Telescope live_grep<CR>", { desc = "[F]ind [G]rep Live" })
+      keymap.set("n", "<leader>fa", ":Telescope live_grep_args<CR>", { desc = "[F]ind Grep Live [A]rgs" })
 
-      keymap.set("n", "<leader>fs", ":Telescope grep_string<CR>", { desc = "Grep [S]tring" })
+      keymap.set("n", "<leader>fs", ":Telescope grep_string<CR>", { desc = "[F]ind Grep [S]tring" })
 
-      keymap.set("n", "<leader>fd", ":Telescope lsp_definitions<CR>", { desc = "LSP [D]efinitions" })
-      keymap.set("n", "<leader>fD", ":Telescope lsp_type_definitions", { desc = "Go to declaration " })
-      keymap.set("n", "<leader>fr", ":Telescope lsp_references<CR>", { desc = "LSP [R]eferences" })
-      keymap.set("n", "<leader>fI", "Telescope lsp_implementations<CR>", { desc = "Go to implementations" })
-      keymap.set("n", "<leader>fo", ":Telescope lsp_outgoing_calls<CR>", { desc = "[O]utgoing calls" })
-      keymap.set("n", "<leader>fi", ":Telescope lsp_incoming_calls<CR>", { desc = "[I]ncoming calls" })
+      keymap.set("n", "<leader>fd", ":Telescope lsp_definitions<CR>", { desc = "[F]ind LSP [D]efinitions" })
+      keymap.set("n", "<leader>fD", ":Telescope lsp_type_definitions", { desc = "[Find ]Go to [[D]]eclaration " })
+      keymap.set("n", "<leader>fr", ":Telescope lsp_references<CR>", { desc = "[F]ind LSP [R]eferences" })
+      keymap.set("n", "<leader>fI", "Telescope lsp_implementations<CR>", { desc = "[F]ind [I]mplementations" })
+      keymap.set("n", "<leader>fo", ":Telescope lsp_outgoing_calls<CR>", { desc = "[F]ind [O]utgoing calls" })
+      keymap.set("n", "<leader>fi", ":Telescope lsp_incoming_calls<CR>", { desc = "[F]ind [I]ncoming calls" })
 
-      keymap.set("n", "<leader>vq", ":Telescope quickfix<CR>", { desc = "See available code actions" })
-      keymap.set("n", "<leader>vt", ":Telescope diagnostics bufnr=0<CR>")
+      keymap.set("n", "<leader>vq", ":Telescope quickfix<CR>", { desc = "[V]iew [Q]ickfix Actions" })
+      keymap.set("n", "<leader>vt", ":Telescope diagnostics bufnr=0<CR>", { desc = "[V]iew D[T]iagnostics" })
 
-      keymap.set("n", "<leader>ft", ":Telescope treesitter<CR>", { desc = "[T]reesitter" })
-      keymap.set("n", "<leader>fc", ":Telescope commands<CR>", { desc = "[C]ommands" })
+      keymap.set("n", "<leader>ft", ":Telescope treesitter<CR>", { desc = "[F]ind in [T]reesitter" })
+      keymap.set("n", "<leader>fc", ":Telescope commands<CR>", { desc = "[F]ind [C]ommands" })
     end,
   },
 }
