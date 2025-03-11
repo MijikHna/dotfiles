@@ -36,30 +36,6 @@ return {
 
     -- LSP Servers
 
-    -- Lua LSP: install lua lsp server; official installation guide for sumneko_l
-    lspconfig.lua_ls.setup({
-      capabilitie = capabilities,
-      settings = { Lua = { telemetry = { enable = false } } },
-    })
-
-    -- Typescript LSP: install typescript LSP (ts_ls) npm install -g typescript typescript-language-server
-    lspconfig.ts_ls.setup({
-      capabilities = capabilities,
-      init_options = {
-        plugins = {
-          {
-            name = "@vue/typescript-plugin",
-            location = os.getenv("HOME") .. "/.nvm/versions/node/v22.9.0/lib/node_modules/@vue/language-server/",
-            languages = { "vue" },
-          },
-        },
-      },
-      filetypes = { "javascript", "typescript", "vue" },
-    })
-
-    -- Vue3 LSP
-    lspconfig.volar.setup({})
-
     -- C/C++ LSP: install c/c++ LSP (clangd) apt install clangd
     lspconfig.clangd.setup({
       cmd = { "clangd", "-completion-style=detailed" },
@@ -70,18 +46,12 @@ return {
     lspconfig.cmake.setup({ capabilities = capabilities })
 
     -- JSON LSP: install json LSP npm install -g vscode-langservers-extracted
-    lspconfig.jsonls.setup({ capabilities = capabilities })
-
-    lspconfig.cssls.setup({ capabilities = capabilities })
-
-    -- HTML LSP: seems not to be useful
-    lspconfig.html.setup({ capabilities = capabilities })
-
+    -- lspconfig.jsonls.setup({ capabilities = capabilities })
+    --
     -- Python LSP
     lspconfig.pyright.setup({
       root_dir = function(fname)
-        local util = require("lspconfig.util")
-        return util.root_pattern("pyproject.toml", "requirements.txt", "pyrightconfig.json", ".git")(fname)
+        return require("lspconfig.util").root_pattern("pyproject.toml", "pyrightconfig.json", ".git")(fname)
       end,
       capabilities = capabilities,
       flags = { debounce_text_changes = 500 },
@@ -96,14 +66,10 @@ return {
         },
       },
     })
-
     -- lspconfig.basedpyright.setup({ capabilities = capabilities })
 
     -- Bash LSP npm install -g bash-language-server; install spellcheck: apt install spellcheck
-    lspconfig.bashls.setup({ capabilities = capabilities })
-
-    -- npm install -g emmet-ls
-    lspconfig.emmet_ls.setup({ capabilities = capabilities })
+    -- lspconfig.bashls.setup({ capabilities = capabilities })
 
     -- Docker-Compose LSP: npm install -g @microsoft/compose-language-service
     lspconfig.docker_compose_language_service.setup({ filetypes = { "yaml.docker-compose" } })
