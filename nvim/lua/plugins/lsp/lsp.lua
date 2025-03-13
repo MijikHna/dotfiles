@@ -4,14 +4,7 @@ return {
   dependencies = {
     -- "hrsh7th/cmp-nvim-lsp",
     "saghen/blink.cmp",
-    { "antosha417/nvim-lsp-file-operations", config = true },
-    {
-      "folke/lazydev.nvim",
-      ft = "lua", -- only load on lua files
-      opts = {
-        library = { { path = "luvit-meta/library", words = { "vim%.uv" } } }, -- load luvit types, when vim.uv is found
-      },
-    },
+    { "antosha417/nvim-lsp-file-operations", enabled = false, config = true },
   },
   config = function()
     local lspconfig = require("lspconfig")
@@ -99,15 +92,16 @@ return {
 
     keymap.set({ "n", "v" }, "ga", vim.lsp.buf.code_action, { desc = "See available code actions" })
     keymap.set({ "n", "i" }, "<C-h>", vim.lsp.buf.signature_help, { desc = "Show signature" })
-    keymap.set("n", "gh", vim.lsp.buf.hover)
-    keymap.set("n", "gp", vim.diagnostic.goto_prev)
-    keymap.set("n", "gn", vim.diagnostic.goto_next)
+    keymap.set({ "n", "i" }, "gm", vim.lsp.buf.signature_help, { desc = "Show signature" })
+    keymap.set("n", "gh", vim.lsp.buf.hover, { desc = "Hover" })
+    keymap.set("n", "gp", vim.diagnostic.goto_prev, { desc = "Go to previous Diagnostics" })
+    keymap.set("n", "gn", vim.diagnostic.goto_next, { desc = "Go to next Diagnostics" })
 
     keymap.set("n", "gR", vim.lsp.buf.rename, { desc = "Smart Rename" })
 
     keymap.set("n", "go", vim.lsp.buf.outgoing_calls, { desc = "Show outgoing calls" })
     keymap.set("n", "gi", vim.lsp.buf.incoming_calls, { desc = "Show incoming calls" })
 
-    keymap.set("n", "gf", vim.diagnostic.open_float)
+    keymap.set("n", "gf", vim.diagnostic.open_float, { desc = "Open Diagnostics" })
   end,
 }
