@@ -145,6 +145,9 @@ return {
       sources = {
         default = { "lsp", "snippets", "path", "buffer" },
         providers = {
+          cmdline = {
+            min_keyword_length = 1,
+          },
           lsp = {
             name = "LSP",
             module = "blink.cmp.sources.lsp",
@@ -200,7 +203,6 @@ return {
           dap = {
             name = "dap",
             module = "blink.compat.source",
-            -- enabled = true,
             enabled = function()
               return require("cmp_dap").is_dap_buffer()
             end,
@@ -214,10 +216,10 @@ return {
           },
         },
         per_filetype = {
-          ["dap-repl"] = { "dap", "lsp", "buffer", "path" },
-          dapui_watches = { "dap", "lsp", "buffer", "path" },
-          dapui_hover = { "dap", "lsp", "buffer", "path" },
-          sql = { "dadbod", "buffer", "lsp" },
+          ["dap-repl"] = { "dap", "path" },
+          dapui_watches = { "dap", "path" },
+          dapui_hover = { "dap", "path" },
+          sql = { "dadbod", "lsp" },
           markdown = { "markdown", "lsp", "buffer", "path" },
         },
       },

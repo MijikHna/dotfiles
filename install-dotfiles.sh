@@ -23,14 +23,11 @@
 npm install -g bun typescript vscode-langservers-extracted emmet-ls @vue/language-server @vue/typescript-plugin browser-sync bash-language-server yaml-language-server pyright
 
 # pip LSPs
-command -v pipx &> /dev/null && pipx install black
-command -v pipx &> /dev/null && pipx install isort
 command -v pipx &> /dev/null && pipx install cmake-language-server
 command -v pipx &> /dev/null && pipx install ninja
-command -v pipx &> /dev/null && pipx install pylint
+command -v pipx &> /dev/null && pipx install ruff
 command -v pipx &> /dev/null && pipx install tldr
 command -v pipx &> /dev/null && pipx install virtualenv
-
 
 # SETTINGS
 

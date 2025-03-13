@@ -71,6 +71,6 @@ return {
 
     opt.list = true
     opt.listchars = { eol = "↴" }
-    -- opt.listchars = { eol = "↴", space = "·" }
+    opt.listchars = { tab = ":>-" }
   end,
 }

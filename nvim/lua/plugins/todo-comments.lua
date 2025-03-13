@@ -1,9 +1,7 @@
 return {
   "folke/todo-comments.nvim",
   event = { "BufReadPre", "BufNewFile" },
-  dependencies = {
-    "nvim-lua/plenary.nvim",
-  },
+  dependencies = { "nvim-lua/plenary.nvim" },
   opts = {
     keywords = {
       FIX = { icon = " ", color = "error", alt = { "FIXME", "BUG", "FIXIT", "ISSUE" } },
