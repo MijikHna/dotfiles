@@ -1,6 +1,6 @@
 return {
   "arnamak/stay-centered.nvim",
-  enabled = true,
+  enabled = false,
   config = function()
     local stay_centered = require("stay-centered")
 
