@@ -1,13 +1,12 @@
 return {
   "sainnhe/edge",
-  priority = 1100,
+  lazy = false,
   enabled = false,
-  lazy = true,
   init = function()
     vim.g.edge_style = "neon"
     vim.g.airline_theme = "edge"
     vim.g.edge_better_performance = true
-    vim.g.edge_transparent_background = 0
+    vim.g.edge_transparent_background = 2
     vim.g.edge_dim_inactive_windows = false
     vim.g.edge_enable_italic = true
     vim.g.edge_diagnostic_virtual_text = "colored"

@@ -6,27 +6,24 @@ local function is_not_fold_buffer()
     return true
   end
 
-  -- local ok, file_stats = pcall(vim.uv.fs_stat, bufname)
   local file_stats = vim.uv.fs_stat(bufname)
-
-  -- print(vim.inspect(file_stats))
 
   if file_stats == nil then
     return true
   end
 
   return file_stats.type == "directory"
-    or vim.bo.filetype == "toggleterm"
-    or vim.bo.filetype == "NvimTree"
-    or vim.bo.filetype == "dapui_console"
-    or vim.bo.filetype == "dapui_scopes"
-    or vim.bo.filetype == "dapui_breakpoints"
-    or vim.bo.filetype == "dapui_stacks"
-    or vim.bo.filetype == "dapui-repl"
-    or vim.bo.filetype == "DiffviewFiles"
-    or vim.bo.filetype == "help"
-    or vim.bo.filetype == "dbout"
-    or vim.bo.filetype == "dbui"
+      or vim.bo.filetype == "toggleterm"
+      or vim.bo.filetype == "NvimTree"
+      or vim.bo.filetype == "dapui_console"
+      or vim.bo.filetype == "dapui_scopes"
+      or vim.bo.filetype == "dapui_breakpoints"
+      or vim.bo.filetype == "dapui_stacks"
+      or vim.bo.filetype == "dapui-repl"
+      or vim.bo.filetype == "DiffviewFiles"
+      or vim.bo.filetype == "help"
+      or vim.bo.filetype == "dbout"
+      or vim.bo.filetype == "dbui"
 end
 local fold_augroup = vim.api.nvim_create_augroup("Folds", { clear = true })
 
@@ -38,7 +35,6 @@ vim.api.nvim_create_autocmd({ "BufWinLeave" }, {
       return
     end
 
-    -- vim.cmd("mkview")
     local ok, result = pcall(vim.api.nvim_exec2, "mkview", {})
 
     if not ok then

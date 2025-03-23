@@ -41,9 +41,9 @@ return {
       id = "cppdbg",
       type = "executable",
       command = os.getenv("HOME")
-        .. "/.vscode/extensions/"
-        .. vscode_util.find_vscode_cpptools()
-        .. "/debugAdapters/bin/OpenDebugAD7",
+          .. "/.vscode/extensions/"
+          .. vscode_util.find_vscode_cpptools()
+          .. "/debugAdapters/bin/OpenDebugAD7",
       options = { detached = false },
     }
 
@@ -69,7 +69,7 @@ return {
       python = { "python", "yaml" },
     })
 
-    require("nvim-dap-virtual-text").setup()
+    require("nvim-dap-virtual-text").setup({})
 
     local dapui = require("dapui")
     local dapui_widgets = require("dap.ui.widgets")

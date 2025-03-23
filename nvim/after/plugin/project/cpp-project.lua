@@ -191,3 +191,4 @@ local function create_cpp_project()
 end
 
 api.nvim_create_user_command("CreateCppProject", create_cpp_project, {})
+api.nvim_create_user_command("CreateCMakePresetsAndClangFormat", copy_cmake_presets_and_clang_format, {})

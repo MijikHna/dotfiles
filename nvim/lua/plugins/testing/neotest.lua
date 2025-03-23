@@ -15,16 +15,15 @@ return {
       adapters = {
         require("neotest-python")({
           dap = { justMyCode = false },
-          python = "venv/bin/python",
+          python = ".venv/bin/python",
           runner = "pytest",
           pytest_discover_instances = true,
+          args = { "--log-level", "DEBUG" }
         }),
         require("neotest-gtest"),
       },
-      discovery = {
-        concurrent = 0,
-        enabled = true,
-      },
+      discovery = { concurrent = 0, enabled = true },
+      auto_close = true,
     })
 
     local keymap = vim.keymap
@@ -36,6 +35,7 @@ return {
 
     keymap.set("n", "<leader>tts", neotest.summary.toggle, { desc = "[T]est [T]oggle Test [S]ummary" })
     keymap.set("n", "<leader>too", function() neotest.output.open({ enter = true }) end, { desc = "[T]est [O]pen [O]utput" })
+    keymap.set("n", "<leader>top", neotest.output_panel.toggle, { desc = "[T]est [O]pen Output[P]anel" })
     keymap.set("n", "<leader>ttw", function() neotest.watch.toggle(vim.fn.expand("%")) end, { desc = "[T]est [T]oggle [W]atch" })
   end,
 }

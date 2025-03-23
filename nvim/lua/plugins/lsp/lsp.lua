@@ -51,24 +51,15 @@ return {
       settings = {
         python = {
           analysis = {
-            diagnosticMode = "openFilesOnly",
-            typeCheckingMode = "basic",
-            useLibraryCodeForTypes = false,
-            autoSearchPaths = false,
+            diagnosticMode = "workspace", --"openFilesOnly",
+            typeCheckingMode = "standard",
+            useLibraryCodeForTypes = true,
+            autoSearchPaths = true,
           },
         },
       },
     })
     -- lspconfig.basedpyright.setup({ capabilities = capabilities })
-
-    -- Bash LSP npm install -g bash-language-server; install spellcheck: apt install spellcheck
-    -- lspconfig.bashls.setup({ capabilities = capabilities })
-
-    -- Docker-Compose LSP: npm install -g @microsoft/compose-language-service
-    lspconfig.docker_compose_language_service.setup({ filetypes = { "yaml.docker-compose" } })
-
-    -- Dockerfile LSP: npm install -g dockerfile-language-server-nodejs
-    lspconfig.dockerls.setup({})
 
     -- YAML LSP: npm install -g yaml-language-server
     lspconfig.yamlls.setup({
@@ -92,7 +83,7 @@ return {
 
     keymap.set({ "n", "v" }, "ga", vim.lsp.buf.code_action, { desc = "See available code actions" })
     keymap.set({ "n", "i" }, "<C-h>", vim.lsp.buf.signature_help, { desc = "Show signature" })
-    keymap.set({ "n", "i" }, "gm", vim.lsp.buf.signature_help, { desc = "Show signature" })
+    keymap.set("n", "gm", vim.lsp.buf.signature_help, { desc = "Show signature" })
     keymap.set("n", "gh", vim.lsp.buf.hover, { desc = "Hover" })
     keymap.set("n", "gp", vim.diagnostic.goto_prev, { desc = "Go to previous Diagnostics" })
     keymap.set("n", "gn", vim.diagnostic.goto_next, { desc = "Go to next Diagnostics" })

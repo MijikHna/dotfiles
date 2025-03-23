@@ -129,7 +129,6 @@ unsetopt extended_history
 [[ -e ~/.profile ]] && emulate sh -c 'source ~/.profile'
 [[ -f ~/.bash_aliases ]] && source $HOME/.bash_aliases
 
-
 LS_COLORS="${LS_COLORS}:tw=30;103:ow=34;103"
 zstyle ':completion:*:default' list-colors ${(s.:.)LS_COLORS} "ma=48;5;103;38;5;255"
 
@@ -155,9 +154,11 @@ export NVM_DIR="$HOME/.nvm"
 
 alias please="sudo"
 
+alias ls='ls -N --color=auto'
 # grep $2 on man $1
 find_man() {
   man $1 | grep -- $2
 }
 
 guifg= #54546d guibg=#16161d
+

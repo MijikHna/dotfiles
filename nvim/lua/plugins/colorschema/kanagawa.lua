@@ -1,6 +1,6 @@
 return {
   "rebelot/kanagawa.nvim",
-  priority = 1050,
+  priority = 1000,
   lazy = true,
   enabled = true,
   opts = {

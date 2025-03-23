@@ -35,7 +35,7 @@ opt.linebreak = false
 -- search
 opt.ignorecase = true
 opt.smartcase = true
-opt.inccommand = "split"
+opt.inccommand = "nosplit"
 
 opt.cursorline = false
 opt.scrolloff = 22
@@ -72,6 +72,5 @@ opt.filetype = "on"
 
 opt.conceallevel = 0
 
-opt.sessionoptions = "blank,buffers,curdir,tabpages,winsize,winpos,terminal,localoptions"
-
+opt.sessionoptions = "blank,buffers,curdir,tabpages,winsize,winpos,terminal,localoptions,folds"
 opt.laststatus = 3

@@ -48,9 +48,9 @@ return {
         additional_vim_regex_highlighting = false,
       },
       indent = { enanble = true },
-      -- autotag = {
-      --   enable = true,
-      -- },
+      autotag = {
+        enable = true,
+      },
       interactive_selection = {
         enable = true,
         keymaps = {
@@ -89,9 +89,12 @@ return {
 
     vim.api.nvim_create_autocmd({ "BufRead", "BufNewFile" }, {
       pattern = "*.hbs",
-      callback = function()
-        vim.cmd("set filetype=html")
-      end,
+      command = "set filetype=html",
+    })
+
+    vim.api.nvim_create_autocmd({ "BufRead", "BufNewFile" }, {
+      pattern = "*.tcss",
+      command = "set filetype=css",
     })
   end,
 }

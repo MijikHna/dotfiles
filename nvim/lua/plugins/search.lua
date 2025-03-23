@@ -1,7 +1,7 @@
 return {
   {
     "nvim-pack/nvim-spectre",
-    enabled = true,
+    enabled = false,
     keys = {
       {
         "<leader>sr",
@@ -26,7 +26,7 @@ return {
   },
   {
     "MagicDuck/grug-far.nvim",
-    enabled = false,
+    enabled = true,
     keys = {
       {
 
