@@ -92,7 +92,7 @@ return {
 
     keymap.set({ "n", "v" }, "ga", vim.lsp.buf.code_action, { desc = "See available code actions" })
     keymap.set({ "n", "i" }, "<C-h>", vim.lsp.buf.signature_help, { desc = "Show signature" })
-    keymap.set({ "n", "i" }, "gm", vim.lsp.buf.signature_help, { desc = "Show signature" })
+    keymap.set("n", "gm", vim.lsp.buf.signature_help, { desc = "Show signature" })
     keymap.set("n", "gh", vim.lsp.buf.hover, { desc = "Hover" })
     keymap.set("n", "gp", vim.diagnostic.goto_prev, { desc = "Go to previous Diagnostics" })
     keymap.set("n", "gn", vim.diagnostic.goto_next, { desc = "Go to next Diagnostics" })

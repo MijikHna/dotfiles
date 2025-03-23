@@ -146,7 +146,7 @@ return {
         default = { "lsp", "snippets", "path", "buffer" },
         providers = {
           cmdline = {
-            min_keyword_length = 1,
+            min_keyword_length = 0,
           },
           lsp = {
             name = "LSP",
