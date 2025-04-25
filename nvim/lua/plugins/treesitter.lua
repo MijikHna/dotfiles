@@ -101,5 +101,10 @@ return {
       pattern = "*.hbs",
       command = "set filetype=html",
     })
+
+    vim.api.nvim_create_autocmd({ "BufRead", "BufNewFile" }, {
+      pattern = "*.tcss",
+      command = "set filetype=css",
+    })
   end,
 }

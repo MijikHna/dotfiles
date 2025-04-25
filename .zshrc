@@ -156,6 +156,9 @@ export PATH=$VCPKG_ROOT:$PATH
 alias luamake=$HOME/prog/lsp/lua-language-server/3rd/luamake/luamake
 PATH=$PATH:$HOME/prog/lsp/lua-language-server/bin
 
+# PYTHON
+export PYTHONDONTWRITEBYTECODE=1
+
 # PIPX autocompletion
 autoload -U bashcompinit
 bashcompinit

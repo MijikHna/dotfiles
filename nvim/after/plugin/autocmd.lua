@@ -6,14 +6,14 @@ local function is_not_fold_buffer()
     return true
   end
 
-  -- local ok, file_stats = pcall(vim.uv.fs_stat, bufname)
   local file_stats = vim.uv.fs_stat(bufname)
-
-  -- print(vim.inspect(file_stats))
 
   if file_stats == nil then
     return true
   end
+
+  -- print(vim.bo.filetype == "help")
+  -- print(vim.bo.filetype)
 
   return file_stats.type == "directory"
     or vim.bo.filetype == "toggleterm"
@@ -38,7 +38,6 @@ vim.api.nvim_create_autocmd({ "BufWinLeave" }, {
       return
     end
 
-    -- vim.cmd("mkview")
     local ok, result = pcall(vim.api.nvim_exec2, "mkview", {})
 
     if not ok then

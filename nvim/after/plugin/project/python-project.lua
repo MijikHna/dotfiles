@@ -49,7 +49,8 @@ local function write_to_requirements_txt()
     return
   end
 
-  requirements_txt:write("pytest\n")
+  requirements_txt:write("#Testing\npytest\n")
+  requirements_txt:write("#Notebooks\npynvim\njupytext\n\nnotebook\nipykernel\njupyter-client")
 
   requirements_txt:close()
 end
@@ -85,7 +86,6 @@ local function create_main_py(current_dir)
   end
 
   local main_content = "def main():\n    print('Hello, World!')\n\nif __name__ == '__main__':\n    main()\n\n\n"
-  main_content = main_content .. "if __name__ == '__main__':\n    main()"
 
   local ok, _ = pcall(vim.uv.fs_write, main_py, main_content)
 
@@ -138,4 +138,45 @@ local function create_python_project()
   vim.cmd("NvimTreeRefresh")
 end
 
+local function create_python_notebook(opts)
+  local filename = opts.args
+
+  if not filename:match("%.ipynb$") then
+    vim.notify("Only .ipynb files are allowed", vim.log.levels.ERROR)
+    return
+  end
+
+  local notebook_file_handler = Path:new(".", filename)
+
+  local notebook_init_content = {
+    cells = {},
+    metadata = {
+      file_extension = ".py",
+      kernelspec = {
+        display_name = "Python 3 64-bit ('.venv')",
+        language = "python",
+        name = "python3",
+      },
+      language_info = {
+        codemirror_mode = {
+          name = "ipython",
+          version = 3,
+        },
+        name = "python",
+      },
+      mimetype = "text/x-python",
+      name = "python",
+      npconvert_exporter = "python",
+      pygments_lexer = "ipython3",
+      version = 3,
+    },
+    nbformat = 4,
+    nbformat_minor = 2,
+  }
+
+  notebook_file_handler:write(vim.json.encode(notebook_init_content), "a")
+  notebook_file_handler:close()
+end
+
 api.nvim_create_user_command("CreatePythonProject", create_python_project, {})
+api.nvim_create_user_command("CreatePythonNotebook", create_python_notebook, { nargs = 1 })

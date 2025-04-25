@@ -1,72 +1,50 @@
 return {
-  -- see https://maxwellrules.com/misc/nvim_jupyter.html
   {
-    -- proper presentation of notebook
+    -- converts ipynb to python or markdown files for editing
     {
       "GCBallesteros/jupytext.nvim",
-      enabled = false,
-      config = true,
+      enabled = true,
+      opts = {
+        style = "markdown",
+        output_extension = "md",
+        force_ft = "markdown",
+      },
     },
-    -- execute cells
     {
-      "Vigemus/iron.nvim",
-      enabled = false,
-      config = function()
-        local iron = require("iron.core")
-        iron.setup({
-          config = {
-            -- Whether a repl should be discarded or not
-            scratch_repl = true,
-            should_map_plug = false,
-            -- Your repl definitions come here
-            repl_definition = {
-              python = {
-                command = { "ipython" },
-                format = require("iron.fts.common").bracketed_paste,
-              },
-            },
-            -- How the repl window will be displayed
-            -- See below for more information
-            repl_open_cmd = require("iron.view").split.vertical.botright(50),
-          },
-          -- Iron doesn't set keymaps by default anymore.
-          -- You can set them here or manually add keymaps to the functions in iron.core
-          keymaps = {
-            send_motion = "<space>sc",
-            visual_send = "<space>sc",
-            send_file = "<space>sf",
-            send_line = "<space>sl",
-            send_paragraph = "<space>sp",
-            send_until_cursor = "<space>su",
-            send_mark = "<space>sm",
-            mark_motion = "<space>mc",
-            mark_visual = "<space>mc",
-            remove_mark = "<space>md",
-            cr = "<space>s<cr>",
-            interrupt = "<space>s<space>",
-            exit = "<space>sq",
-            clear = "<space>cl",
-          },
-          -- If the highlight is on, you can change how it looks
-          -- For the available options, check nvim_set_hl
-          highlight = {
-            italic = true,
-          },
-          ignore_blank_lines = true, -- ignore blank lines when sending visual select lines
-        })
+      "quarto-dev/quarto-nvim",
+      dependencies = {
+        "jmbuhr/otter.nvim",
+        "nvim-treesitter/nvim-treesitter",
+      },
+      ft = { "quarto", "markdown" },
+      opts = {
+        lspFeatures = {
+          enabled = true,
+          languages = { "python" },
+          chunks = "all",
+          diagnostics = { enabled = true, triggers = { "BufWritePost" } },
+          completion = { enabled = true },
+        },
+        codeRunner = { enabled = true, default_method = "molten" },
+      },
+      init = function()
+        local runner = require("quarto.runner")
+
+        local keymap = vim.keymap
+
+        local function run_all()
+          runner.run_all(true)
+        end
+
+        keymap.set("n", "<localleader>rc", runner.run_cell, { desc = "run cell", silent = true })
+        keymap.set("n", "<localleader>ra", runner.run_above, { desc = "run cell and above", silent = true })
+        keymap.set("n", "<localleader>rA", runner.run_all, { desc = "run all cells", silent = true })
+        keymap.set("n", "<localleader>rl", runner.run_line, { desc = "run line", silent = true })
+        keymap.set("v", "<localleader>r", runner.run_range, { desc = "run visual range", silent = true })
+        keymap.set("n", "<localleader>RA", run_all, { desc = "run all cells of all languages", silent = true })
       end,
     },
-    -- alternative for iron.nvim
-    -- {
-    --   "dccsillag/magma-nvim",
-    --   build = ":UpdateRemotePlugins",
-    --   init = function()
-    --     local python_utils = require("utils.python")
-    --
-    --     vim.g.python3_host_prog = python_utils.get_venv_python_exec()
-    --   end
-    -- },
-    -- actually just for more similar notebook navigation
+    -- navigating through cells
     {
       "GCBallesteros/vim-textobj-hydrogen",
       enabled = false,
@@ -74,8 +52,17 @@ return {
         "kana/vim-textobj-user",
       },
     },
+    {
+      -- READ THE MANUAL <https://github.com/benlubas/molten-nvim/blob/main/docs/Not-So-Quick-Start-Guide.md>
+      "benlubas/molten-nvim",
+      enabled = true,
+      build = ":UpdateRemotePlugins",
+      init = function()
+        vim.g.molten_output_win_max_height = 12
+        vim.g.molten_wrap_output = true
+        vim.g.molten_virt_text_output = true
+        vim.g.molten_virt_lines_off_by_1 = true
+      end,
+    },
   },
-  -- {
-  --   "luk400/vim-jukit"
-  -- },
 }

@@ -16,6 +16,20 @@ return {
         lualine_x = {
           {
             function()
+              if vim.g.loaded_copilot == 1 and vim.fn["copilot#Enabled"]() == 1 then
+                return ""
+              elseif vim.g.loaded_copilot == 1 and vim.fn["copilot#RunningClient"]() then
+                return ""
+              else
+                return ""
+              end
+            end,
+            icon_only = true,
+            color = { fg = "#ccb3b3" },
+            padding = 1,
+          },
+          {
+            function()
               local msg = "No LSP Attached"
               local buf_ft = vim.api.nvim_get_option_value("filetype", { buf = 0 })
               local clients = vim.lsp.get_clients()
@@ -32,7 +46,7 @@ return {
             end,
             icon = "",
             color = { fg = "#ccb3b3" },
-            padding = 3,
+            padding = 1,
           },
           {
             lazy_status.updates,

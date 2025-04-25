@@ -27,7 +27,7 @@ return {
     },
     opts = {},
     init = function()
-      vim.keymap.set("n", "<leader>cct", ":CopilotChatToggle<CR>")
+      vim.keymap.set("n", "<leader>cct", ":CopilotChatToggle<CR><C-w>=")
     end,
   },
   {

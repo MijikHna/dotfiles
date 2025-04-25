@@ -73,5 +73,5 @@ opt.filetype = "on"
 
 opt.conceallevel = 0
 
-opt.sessionoptions = "blank,buffers,curdir,tabpages,winsize,winpos,terminal,localoptions"
+opt.sessionoptions = "blank,buffers,curdir,tabpages,winsize,winpos,terminal,localoptions,folds"
 opt.laststatus = 3

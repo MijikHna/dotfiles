@@ -70,7 +70,6 @@ return {
     local opt = vim.opt
 
     opt.list = true
-    opt.listchars = { eol = "↴" }
-    opt.listchars = { tab = ":>-" }
+    opt.listchars = { eol = "↴", tab = ":>-" }
   end,
 }

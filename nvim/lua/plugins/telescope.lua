@@ -43,7 +43,27 @@ return {
           layout_config = { height = 0.35, width = 0.55 }, --center
           prompt_position = "bottom",
         },
-        pickers = { find_files = { hidden = true } },
+        pickers = {
+          find_files = {
+            hidden = true,
+            -- no_ignore = true,
+            file_ignore_patterns = {
+              "node_modules/",
+              "dist/",
+              ".venv/",
+              "plugged/",
+              "undodir/",
+              "%.git/",
+              "build/",
+              ".cache",
+              "bin/",
+              "target/",
+              "lib/",
+              "vcpkg_installed/",
+              ".nuxt/",
+            },
+          },
+        },
         extensions = {
           live_grep_args = {
             auto_quoting = false,
@@ -65,6 +85,33 @@ return {
 
       telescope.load_extension("live_grep_args")
       require("telescope").load_extension("notify")
+
+      -- local previewers = require("telescope.previewers")
+      -- local Job = require("plenary.job")
+      --
+      -- require("telescope.builtin").find_files({
+      --   previewer = previewers.new_buffer_previewer({
+      --     define_preview = function(self, entry, status)
+      --       Job
+      --         :new({
+      --           command = "cat",
+      --           args = { entry.path },
+      --           on_exit = function(j)
+      --             local lines = j:result()
+      --             vim.schedule(function()
+      --               vim.api.nvim_buf_set_lines(self.state.bufnr, 0, -1, false, lines)
+      --               vim.api.nvim_buf_set_option(self.state.bufnr, "filetype", "env") -- optional
+      --               vim.api.nvim_buf_set_option(self.state.bufnr, "conceallevel", 2)
+      --
+      --               vim.cmd(string.format("syntax match EnvVarValue /\\(^[^=]*=\\)\\@<=.*/ conceal cchar=🔒"))
+      --               vim.cmd("highlight link EnvVarValue Conceal")
+      --             end)
+      --           end,
+      --         })
+      --         :start()
+      --     end,
+      --   }),
+      -- })
 
       local keymap = vim.keymap
       keymap.set("n", "<leader>ff", ":Telescope find_files<CR>", { desc = "[F]ind Files" })

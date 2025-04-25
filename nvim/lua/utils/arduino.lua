@@ -1,17 +1,18 @@
-local ArduinoUtil = {}
+local M = {}
 
-function ArduinoUtil.get_arduino_board_fqbn()
+function M.get_arduino_board_fqbn()
   -- read sketch.yaml file and get fqbn from it
-  local sketch_yaml = io.open('sketch.yaml', 'r')
+  local sketch_yaml = io.open("sketch.yaml", "r")
 
   if sketch_yaml == nil then
-    return ''
+    return ""
   end
 
-  local board_fqbn = ''
+  local board_fqbn = ""
+
   for line in sketch_yaml:lines() do
-    if line:sub(1, #'default_fqbn:') == 'default_fqbn:' then
-      board_fqbn = line:sub(#'default_fqbn:' + 2)
+    if line:sub(1, #"default_fqbn:") == "default_fqbn:" then
+      board_fqbn = line:sub(#"default_fqbn:" + 2)
       break
     end
   end
@@ -20,4 +21,4 @@ function ArduinoUtil.get_arduino_board_fqbn()
   return board_fqbn
 end
 
-return ArduinoUtil
+return M

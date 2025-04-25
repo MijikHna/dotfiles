@@ -64,25 +64,25 @@ config.font = wezterm.font_with_fallback({
 })
 
 -- config.window_background_image = os.getenv("HOME") .. "/.dotfiles/term-backgrounds/dec/AOA3-scaled.png"
--- config.window_background_image_hsb = { brightness = 0.82 }
+-- config.window_background_image_hsb = { brightness = 0.88 }
 -- config.window_background_image = os.getenv("HOME") .. "/.dotfiles/term-backgrounds/dec/AOA6.png"
--- config.window_background_image_hsb = { brightness = 0.29 }
+-- config.window_background_image_hsb = { brightness = 0.36 }
 -- config.window_background_image = os.getenv("HOME") .. "/.dotfiles/term-backgrounds/dec/BESTie.png"
--- config.window_background_image_hsb = { brightness = 0.55 }
+-- config.window_background_image_hsb = { brightness = 0.50 }
 -- config.window_background_image = os.getenv("HOME") .. "/.dotfiles/term-backgrounds/dec/red-velvet1.jpg"
 -- config.window_background_image_hsb = { brightness = 0.027 }
--- config.window_background_image = os.getenv("HOME") .. "/.dotfiles/term-backgrounds/dec/red-velvet2.jpg"
--- config.window_background_image_hsb = { brightness = 0.031 }
+config.window_background_image = os.getenv("HOME") .. "/.dotfiles/term-backgrounds/dec/red-velvet2.jpg"
+config.window_background_image_hsb = { brightness = 0.046 }
 -- config.window_background_image = os.getenv("HOME") .. "/.dotfiles/term-backgrounds/dec/sunmi1.png"
 -- config.window_background_image_hsb = { brightness = 0.31 }
 -- config.window_background_image = os.getenv("HOME") .. "/.dotfiles/term-backgrounds/dec/sunmi2.png"
--- config.window_background_image_hsb = { brightness = 0.30 }
+-- config.window_background_image_hsb = { brightness = 0.32 }
 -- config.window_background_image = os.getenv("HOME") .. "/Pictures/Wallpapers/Rescene/RESCENE-1.jpeg"
 -- config.window_background_image_hsb = { brightness = 0.016 }
 -- config.window_background_image = os.getenv("HOME") .. "/Pictures/Wallpapers/Rescene/RESCENE-2-darken.png"
--- config.window_background_image_hsb = { brightness = 0.28 }
-config.window_background_image = os.getenv("HOME") .. "/Pictures/Wallpapers/4 minute/4minute-2_16-9.png"
-config.window_background_image_hsb = { brightness = 0.38 }
+-- config.window_background_image_hsb = { brightness = 0.36 }
+-- config.window_background_image = os.getenv("HOME") .. "/Pictures/Wallpapers/4 minute/4minute-2_16-9.png"
+-- config.window_background_image_hsb = { brightness = 0.38 }
 -- config.window_background_image = os.getenv("HOME") .. "/Pictures/Wallpapers/4 minute/4minute-2_16-10.png"
 -- config.window_background_image_hsb = { brightness = 0.38 }
 
@@ -100,6 +100,7 @@ config.window_decorations = "TITLE | RESIZE"
 
 config.max_fps = 120
 config.animation_fps = 120
+
 -- Key bindings
 config.keys = {
   {
@@ -112,17 +113,15 @@ config.keys = {
   { key = "l", mods = "ALT", action = wezterm.action({ SendKey = { key = "l", mods = "ALT" } }) },
 }
 
-config.colors = {
-  cursor_bg = "#c4c4c6",
-}
+config.colors = { cursor_bg = "#c4c4c6" }
 
 config.force_reverse_video_cursor = false -- cursor color
 
-wezterm.on("window-resized", function(window, pane)
+wezterm.on("window-resized", function (window, pane)
   recompute_padding(window, pane)
 end)
 
-wezterm.on("window-config-reloaded", function(window, pane)
+wezterm.on("window-config-reloaded", function (window, pane)
   recompute_padding(window, pane)
 end)
 
