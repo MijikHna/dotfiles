@@ -1,0 +1,31 @@
+name: Socket Vulnerability Scan
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  socket-scan:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Install Socket CLI
+        run: npm install -g socket
+
+      # TODO: install jq, send the response to jq and grep scanId
+      - name: Run Socket scan
+        run: |
+          socket scan create --report --repo=${{github.event.repository.name}} --branch=${{github.ref_name}} ${{github.repository_owner}} .
+        env:
+          SOCKET_SECURITY_API_KEY: ${{ secrets.SOCKET_API_TOKEN }}
+
+      # TODO: create own action to query the report and show the score
+      # IDEA: python: requests, rich, use scanId from prev step
+      - name: Show Report
+        run: echo "Not Yet Implemented"

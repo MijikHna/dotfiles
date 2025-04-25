@@ -1,0 +1,13 @@
+basedpyright==1.28.3,
+cmake-language-server==0.1.11,
+ninja==1.11.1.4,
+pylatexenc==2.10,
+ruff==0.11.2,
+tldr==3.3.0,
+virtualenv==20.29.3,
+debugpy==1.8.12
+pynvim==latest
+jupytext==latest
+notebook==latest
+ipykernel==latest
+jupyter-client==latest
