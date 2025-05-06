@@ -20,3 +20,4 @@ backup/
 **dec/
 errors/
 not-used/
+*.env

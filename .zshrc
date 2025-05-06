@@ -198,6 +198,8 @@ export NVM_DIR="$HOME/.nvm"
 
 alias please="sudo"
 
+alias ls='ls -N --color=auto'
+
 alias -s txt=nvim
 alias -s py=nvim
 alias -s json=nvim

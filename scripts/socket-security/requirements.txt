@@ -1,0 +1,8 @@
+# main
+requests
+rich
+
+
+# test
+python-dotenv
+pytest

@@ -15,17 +15,25 @@ jobs:
         with:
           fetch-depth: 0
 
-      - name: Install Socket CLI
-        run: npm install -g socket
+      - name: Install Dependencies
+        run: |
+          npm install -g socket
+          pip install -r scripts/socket-security/requirements.txt
 
-      # TODO: install jq, send the response to jq and grep scanId
       - name: Run Socket scan
         run: |
-          socket scan create --report --repo=${{github.event.repository.name}} --branch=${{github.ref_name}} ${{github.repository_owner}} .
+          # socket scan create --report --repo=${{github.event.repository.name}} --branch=${{github.ref_name}} ${{github.repository_owner}} .
+          SCAN_OUTPUT=$(socket scan create --report --repo=${{github.event.repository.name}} --branch=${{github.ref_name}} ${{github.repository_owner}} .)
+          SCAN_ID=$(echo "$SCAN_OUTPUT" | grep -o "scanId: '.*'" | awk -F"'" '{print $2}')
+          echo "SCAN_ID=$SCAN_ID" >> $GITHUB_ENV
+          echo "SCAN_ID: ${SCAN_ID}"
         env:
           SOCKET_SECURITY_API_KEY: ${{ secrets.SOCKET_API_TOKEN }}
 
-      # TODO: create own action to query the report and show the score
-      # IDEA: python: requests, rich, use scanId from prev step
       - name: Show Report
-        run: echo "Not Yet Implemented"
+        shell: bash
+        run: |
+          python scripts/socket-security/socket_security/fetch_report.py
+        env:
+          SOCKET_SECURITY_API_KEY: ${{ secrets.SOCKET_API_TOKEN }}
+          SLUG: ${{github.repository_owner}}

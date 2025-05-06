@@ -7,20 +7,23 @@ return {
     { "antosha417/nvim-lsp-file-operations", config = true, enabled = false },
     {
       "folke/lazydev.nvim",
-      ft = "lua", -- only load on lua files
+      ft = "lua",                                                                      -- only load on lua files
       opts = { library = { { path = "luvit-meta/library", words = { "vim%.uv" } } } }, -- load luvit types, when vim.uv is found
     },
   },
 
-  config = function()
+  config = function ()
     local lspconfig = require("lspconfig")
     -- local cmp_nvim_lsp = require("cmp_nvim_lsp")
 
     local arduino_util = require("utils.arduino")
     local qt = require("utils.qt")
 
-    local textDocument = { completion = { completionItem = { snippetSupport = false } } }
-    local workspace = { didChangeWatchedFiles = true }
+    local textDocument = {
+      completion = { completionItem = { snippetSupport = false } },
+      foldingRange = { dynamicRegistration = false, lineFoldingOnly = true }
+    }
+    local workspace = { didChangeWatchedFiles = { dynamicRegistration = true } }
     local offsetEncoding = { "utf-16" }
     local general = { positionEncodings = { "utf-16" } }
 
@@ -89,7 +92,6 @@ return {
 
     -- Python LSP
     lspconfig.pyright.setup({ capabilities = capabilities })
-
     -- lspconfig.basedpyright.setup({ capabilities = capabilities })
 
     -- Bash LSP npm install -g bash-language-server; install spellcheck: apt install spellcheck
@@ -182,10 +184,10 @@ return {
     keymap.set({ "n", "i" }, "<C-h>", vim.lsp.buf.signature_help, { desc = "Signature" })
     keymap.set("n", "gs", vim.lsp.buf.signature_help, { desc = "[G]o how [S]ignature" })
     keymap.set("n", "gh", vim.lsp.buf.hover, { desc = "[H]over" })
-    keymap.set("n", "gp", function()
+    keymap.set("n", "gp", function ()
       vim.diagnostic.jump({ count = -1 })
     end, { desc = "[G]o to [P]revious Diagnostics" })
-    keymap.set("n", "gn", function()
+    keymap.set("n", "gn", function ()
       vim.diagnostic.jump({ count = 1 })
     end, { desc = "[G]o to [N]ext Diagnostics" })
 
@@ -196,12 +198,12 @@ return {
 
     keymap.set("n", "gf", vim.diagnostic.open_float, { desc = "[G]o to [F]loat Window Diagnostics" })
 
-    vim.keymap.set("n", "gv", function()
+    vim.keymap.set("n", "gv", function ()
       vim.diagnostic.config({ virtual_lines = { current_line = true }, virtual_text = false })
 
       vim.api.nvim_create_autocmd("CursorMoved", {
         group = vim.api.nvim_create_augroup("line-diagnostics", { clear = true }),
-        callback = function()
+        callback = function ()
           vim.diagnostic.config({ virtual_lines = false, virtual_text = true })
           return true
         end,

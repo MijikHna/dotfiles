@@ -12,5 +12,13 @@ return {
       { noremap = true, silent = true },
     },
   },
-  opts = {},
+  opts = {
+    enhanced_diff_hl = true,
+    use_icons = true,
+    view = {
+      default = { layout = "diff2_horizontal" },
+      merge_tool = { layout = "diff3_horizontal" },
+    },
+  },
+  config = true,
 }
