@@ -2,7 +2,7 @@ return {
   "Civitasv/cmake-tools.nvim",
   dependencies = "nvim-lua/plenary.nvim",
   enabled = true,
-  config = function()
+  config = function ()
     require("cmake-tools").setup({
       cmake_command = "cmake",
       ctest_command = "ctest",
@@ -50,6 +50,7 @@ return {
             close_on_exit = false,
             auto_scroll = true,
             singleton = true,
+            auto_close_when_success = true,
           },
         },
       },

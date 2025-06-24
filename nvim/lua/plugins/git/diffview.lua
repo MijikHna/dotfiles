@@ -1,17 +1,5 @@
 return {
   "sindrets/diffview.nvim",
-  keys = {
-    {
-      "<leader>gh",
-      ":DiffviewOpen<CR>",
-      { noremap = true, silent = true },
-    },
-    {
-      "<leader>gc",
-      ":DiffviewClose<CR>",
-      { noremap = true, silent = true },
-    },
-  },
   opts = {
     enhanced_diff_hl = true,
     use_icons = true,
@@ -21,4 +9,10 @@ return {
     },
   },
   config = true,
+  init = function ()
+    local keymap = vim.keymap
+
+    keymap.set("n", "<leader>gh", ":DiffviewOpen<CR>", { noremap = true, silent = true })
+    keymap.set("n", "<leader>gc", ":DiffviewClose<CR>", { noremap = true, silent = true })
+  end
 }

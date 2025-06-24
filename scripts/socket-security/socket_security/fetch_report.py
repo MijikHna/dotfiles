@@ -80,7 +80,7 @@ def fetch_report() -> None:
             license_values.append(license_)
 
             # Print the package name and its scores
-            if overall < 0.65:
+            if overall < 0.60:
                 print(f"Package: {name}")
                 print(f"{generate_bar(overall)} {overall:.2f} - Overall")
                 print(f"{generate_bar(supply_chain)} {supply_chain:.2f} - Supply Chain")
