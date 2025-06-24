@@ -11,10 +11,13 @@ return {
         opts = {},
       },
       "onsails/lspkind.nvim",
-      { "L3MON4D3/LuaSnip", version = "v2.*" },
+      {
+        "L3MON4D3/LuaSnip",
+        version = "v2.*"
+      },
       {
         "rafamadriz/friendly-snippets",
-        config = function()
+        config = function ()
           require("luasnip.loaders.from_vscode").lazy_load()
           require("luasnip.loaders.from_vscode").lazy_load({
             paths = { vim.fn.stdpath("config") .. "/nvim/my-snippets" },
@@ -26,18 +29,18 @@ return {
     },
     version = "*",
     opts = {
-      enabled = function()
+      enabled = function ()
         return (vim.bo.buftype ~= "prompt" or require("cmp_dap").is_dap_buffer()) and vim.bo.filetype ~= "DressingInput"
       end,
       fuzzy = {
-        max_typos = function(keyword)
-          return math.floor(#keyword / 4)
-        end,
+        implementation = "lua",
+         
+        max_typos = function (keyword) return math.floor(#keyword / 4) end,
         use_frecency = true,
         use_proximity = true,
         use_unsafe_no_lock = false,
         sorts = { "score", "sort_text" },
-        prebuilt_binaries = { download = true },
+        prebuilt_binaries = { download = false },
       },
       keymap = {
         preset = "default",
@@ -61,25 +64,18 @@ return {
         keymap = {
           preset = "enter",
           ["<CR>"] = {
-            function(cmp)
-              return cmp.accept({
-                callback = function()
-                  vim.api.nvim_feedkeys("\n", "n", true)
-                end,
-              })
+            function (cmp)
+              return cmp.accept({ callback = function () vim.api.nvim_feedkeys("\n", "n", true) end })
             end,
             "fallback",
           },
         },
-        sources = function()
+        sources = function ()
           local type = vim.fn.getcmdtype()
-          if type == "/" or type == "?" then
-            return { "buffer" }
-          end
 
-          if type == ":" or type == "@" then
-            return { "cmdline" }
-          end
+          if type == "/" or type == "?" then return { "buffer" } end
+          if type == ":" or type == "@" then return { "cmdline" } end
+
           return {}
         end,
         completion = {
@@ -89,7 +85,7 @@ return {
             auto_show = true,
             draw = {
               columns = {
-                { "label", "label_description", gap = 1 },
+                { "label",      "label_description", gap = 1 },
                 { "kind_icon" },
                 { "kind" },
                 { "source_name" },
@@ -97,6 +93,30 @@ return {
             },
           },
         },
+      },
+      term = {
+        enabled = false,
+        keymap = { preset = "inherit" }, -- Inherits from top level `keymap` config when not set
+        -- sources = {},
+        completion = {
+          trigger = {
+            show_on_blocked_trigger_characters = {},
+            show_on_x_blocked_trigger_characters = nil, -- Inherits from top level `completion.trigger.show_on_blocked_trigger_characters` config when not set
+          },
+          -- Inherits from top level config options when not set
+          list = {
+            selection = {
+              -- When `true`, will automatically select the first item in the completion list
+              preselect = nil,
+              -- When `true`, inserts the completion item automatically when selecting it
+              auto_insert = nil,
+            },
+          },
+          -- Whether to automatically show the window when new completion items are available
+          menu = { auto_show = nil },
+          -- Displays a preview of the selected item on the current line
+          ghost_text = { enabled = nil }
+        }
       },
       appearance = {
         use_nvim_cmp_as_default = true,
@@ -110,35 +130,47 @@ return {
           show_on_accept_on_trigger_character = true,
         },
         keyword = { range = "full" },
-        accept = { auto_brackets = { enabled = true } },
+        accept = {
+          auto_brackets = {
+            enabled = true,
+            kind_resolution = {
+              enabled = true,
+              blocked_filetypes = { "vue" },
+            },
+            semantic_token_resolution = {
+              enabled = true,
+              blocked_filetypes = { "java" },
+              timeout_ms = 400, -- How long to wait for semantic tokens to return before assuming no brackets should be added
+            },
+          }
+        },
         list = { selection = { preselect = false, auto_insert = true } },
         menu = {
           auto_show = true,
           draw = {
             columns = {
-              { "label", "label_description", gap = 1 },
+              { "label",      "label_description", gap = 1 },
               { "kind_icon" },
               { "kind" },
               { "source_name" },
             },
-            treesitter = { "lsp" },
+            -- treesitter = { "lsp" },
           },
         },
-        documentation = { auto_show = true, auto_show_delay_ms = 500, treesitter_highlighting = false },
+        documentation = { auto_show = true, auto_show_delay_ms = 500, treesitter_highlighting = true },
         ghost_text = { enabled = false },
       },
       snippets = {
         preset = "luasnip",
-        expand = function(snippet)
+        expand = function (snippet)
           require("luasnip").lsp_expand(snippet)
         end,
-        active = function(filter)
-          if filter and filter.direction then
-            return require("luasnip").jumpable(filter.direction)
-          end
+        active = function (filter)
+          if filter and filter.direction then return require("luasnip").jumpable(filter.direction) end
+
           return require("luasnip").in_snippet()
         end,
-        jump = function(direction)
+        jump = function (direction)
           require("luasnip").jump(direction)
         end,
       },
@@ -167,9 +199,7 @@ return {
             opts = {
               trailing_slash = false,
               label_trailing_slash = true,
-              get_cwd = function(context)
-                return vim.fn.expand(("#%d:p:h"):format(context.bufnr))
-              end,
+              get_cwd = function (context) return vim.fn.expand(("#%d:p:h"):format(context.bufnr)) end,
               show_hidden_files_by_default = true,
             },
           },
@@ -203,9 +233,7 @@ return {
           dap = {
             name = "dap",
             module = "blink.compat.source",
-            enabled = function()
-              return require("cmp_dap").is_dap_buffer()
-            end,
+            enabled = function () return require("cmp_dap").is_dap_buffer() end,
             score_offset = 90,
           },
           markdown = {
@@ -221,6 +249,7 @@ return {
           dapui_hover = { "dap", "path" },
           sql = { "dadbod", "lsp" },
           markdown = { "markdown", "lsp", "buffer", "path" },
+          -- lua = { inherit_defaults = true, 'lazydev' },
         },
       },
       signature = { enabled = true },
@@ -229,7 +258,7 @@ return {
   {
     "hrsh7th/cmp-cmdline",
     enabled = false,
-    config = function()
+    config = function ()
       local cmp = require("cmp")
 
       -- Use buffer source for `/` (if you enabled `native_menu`, this won't work anymore).
@@ -251,16 +280,16 @@ return {
     enabled = false,
     dependencies = {
       "hrsh7th/cmp-buffer", -- source for text in buffer
-      "hrsh7th/cmp-path", -- source for file system paths
+      "hrsh7th/cmp-path",   -- source for file system paths
       "hrsh7th/cmp-cmdline",
       "rcarriga/cmp-dap",
       "onsails/lspkind.nvim", -- vs-code like pictograms
       { "kristijanhusak/vim-dadbod-completion", lazy = true },
-      { "L3MON4D3/LuaSnip", version = "2.*" },
-      "saadparwaiz1/cmp_luasnip", -- for autocompletion
+      { "L3MON4D3/LuaSnip",                     version = "2.*" },
+      "saadparwaiz1/cmp_luasnip",     -- for autocompletion
       "rafamadriz/friendly-snippets", -- useful snippets
     },
-    config = function()
+    config = function ()
       local cmp = require("cmp")
       local luasnip = require("luasnip")
       local lspkind = require("lspkind")
@@ -276,7 +305,7 @@ return {
           completeopt = "menu,menuone,preview,noselect",
         },
         snippet = { -- configure how nvim-cmp interacts with snippet engine
-          expand = function(args)
+          expand = function (args)
             luasnip.lsp_expand(args.body)
           end,
         },
@@ -286,9 +315,9 @@ return {
           ["<C-b>"] = cmp.mapping.scroll_docs(-4),
           ["<C-f>"] = cmp.mapping.scroll_docs(4),
           ["<C-Space>"] = cmp.mapping.complete(), -- show completion suggestions
-          ["<C-e>"] = cmp.mapping.abort(), -- close completion window
+          ["<C-e>"] = cmp.mapping.abort(),        -- close completion window
           ["<CR>"] = cmp.mapping.confirm({ select = false }),
-          ["<Tab>"] = function(fallback)
+          ["<Tab>"] = function (fallback)
             if cmp.visible() then
               cmp.select_next_item()
             elseif luasnip.expand_or_jumpable() then
@@ -297,7 +326,7 @@ return {
               fallback()
             end
           end,
-          ["<C-n>"] = function(fallback)
+          ["<C-n>"] = function (fallback)
             if cmp.visible() then
               cmp.select_next_item()
             elseif luasnip.expand_or_jumpable() then
@@ -306,7 +335,7 @@ return {
               fallback()
             end
           end,
-          ["<S-Tab>"] = function(fallback)
+          ["<S-Tab>"] = function (fallback)
             if cmp.visible() then
               cmp.select_prev_item()
             elseif luasnip.jumpable(-1) then
@@ -315,7 +344,7 @@ return {
               fallback()
             end
           end,
-          ["<C-p>"] = function(fallback)
+          ["<C-p>"] = function (fallback)
             if cmp.visible() then
               cmp.select_prev_item()
             elseif luasnip.jumpable(-1) then
@@ -328,21 +357,18 @@ return {
         -- sources for autocompletion
         sources = cmp.config.sources({
           { name = "nvim_lsp" },
-          { name = "luasnip" }, -- snippets
-          { name = "buffer" }, -- text within current buffer
-          { name = "path" }, -- file system paths
-          { name = "lazydev", group_index = 0 }, -- skip loading LuaLS completions
+          { name = "luasnip" },                     -- snippets
+          { name = "buffer" },                      -- text within current buffer
+          { name = "path" },                        -- file system paths
+          { name = "lazydev",    group_index = 0 }, -- skip loading LuaLS completions
           { name = "cmp-cmdline" },
         }),
 
         -- configure lspkind for vs-code like pictograms in completion menu
         formatting = {
-          format = lspkind.cmp_format({
-            maxwidth = 50,
-            ellipsis_char = "...",
-          }),
+          format = lspkind.cmp_format({ maxwidth = 50, ellipsis_char = "...", }),
         },
-        enabled = function()
+        enabled = function ()
           return vim.api.nvim_get_option_info2("buftype", {}) ~= "prompt" or require("cmp_dap").is_dap_buffer()
         end,
       })
@@ -357,24 +383,12 @@ return {
 
       local keymap = vim.keymap
 
-      keymap.set(
-        "i",
-        "<Tab>",
-        "luasnip#expand_or_jumpable() ? '<Plug>luasnip-expand-or-jump' : '<Tab>'",
-        { expr = true, silent = true }
-      )
-      keymap.set("s", "<Tab>", function()
-        luasnip.jump(1)
-      end, { silent = true })
-      keymap.set("s", "<S-Tab>", function()
-        luasnip.jump(-1)
-      end, { silent = true })
-      keymap.set(
-        "i",
-        "<C-E>",
-        "luasnip#choise_active() ? '<Plug>luasnip-next-choice' : '<C-E>'",
-        { expr = true, silent = true }
-      )
+      keymap.set("i", "<Tab>", "luasnip#expand_or_jumpable() ? '<Plug>luasnip-expand-or-jump' : '<Tab>'",
+        { expr = true, silent = true })
+      keymap.set("s", "<Tab>", function () luasnip.jump(1) end, { silent = true })
+      keymap.set("s", "<S-Tab>", function () luasnip.jump(-1) end, { silent = true })
+      keymap.set("i", "<C-E>", "luasnip#choise_active() ? '<Plug>luasnip-next-choice' : '<C-E>'",
+        { expr = true, silent = true })
     end,
   },
 }

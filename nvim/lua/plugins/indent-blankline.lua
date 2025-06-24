@@ -2,13 +2,13 @@ return {
   "lukas-reineke/indent-blankline.nvim",
   event = { "BufReadPre", "BufNewFile" },
   main = "ibl",
-  config = function()
+  config = function ()
     local ibl = require("ibl")
     local hooks = require("ibl.hooks")
 
     local highlight = { "RainbowBlue" }
 
-    hooks.register(hooks.type.HIGHLIGHT_SETUP, function()
+    hooks.register(hooks.type.HIGHLIGHT_SETUP, function ()
       vim.api.nvim_set_hl(0, "RainbowBlue", { fg = "#61AFEF" })
     end)
 
@@ -51,6 +51,31 @@ return {
               "object_type",
               "ternary_expression",
             },
+            python = {
+              "arguments",
+              "arrow_function",
+              "assignment_statement",
+              "catch_clause",
+              "chunk",
+              "do_statement",
+              "for_in_statement",
+              "for_statement",
+              "function",
+              "function_declaration",
+              "function_definition",
+              "if_statement",
+              "method_definition",
+              "object",
+              "object_pattern",
+              "object_type",
+              "repeat_statement",
+              "statement_block",
+              "switch_case",
+              "switch_default",
+              "switch_statement",
+              "ternary_expression",
+              "while_statement",
+            }
           },
         },
       },
@@ -70,6 +95,6 @@ return {
     local opt = vim.opt
 
     opt.list = true
-    opt.listchars = { eol = "↴", tab = ":>-" }
+    opt.listchars = { eol = "↴", tab = ":>-", }
   end,
 }

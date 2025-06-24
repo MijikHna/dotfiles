@@ -2,7 +2,6 @@ return {
   "neovim/nvim-lspconfig",
   event = { "BufReadPre", "BufNewFile" },
   dependencies = {
-    -- "hrsh7th/cmp-nvim-lsp",
     "saghen/blink.cmp",
     { "antosha417/nvim-lsp-file-operations", config = true, enabled = false },
     {
@@ -19,25 +18,17 @@ return {
     local arduino_util = require("utils.arduino")
     local qt = require("utils.qt")
 
-    local textDocument = {
-      completion = { completionItem = { snippetSupport = false } },
-      foldingRange = { dynamicRegistration = false, lineFoldingOnly = true }
+    local capabilities = {
+      workspace = { didChangeWatchedFiles = { dynamicRegistration = true } },
+      offsetEncoding = { "utf-16" },
+      general = { positionEncodings = { "utf-16" } },
+      textDocument = {
+        completion = { completionItem = { snippetSupport = false } },
+        foldingRange = { dynamicRegistration = true, lineFoldingOnly = true }
+      }
     }
-    local workspace = { didChangeWatchedFiles = { dynamicRegistration = true } }
-    local offsetEncoding = { "utf-16" }
-    local general = { positionEncodings = { "utf-16" } }
 
-    -- local capabilities = cmp_nvim_lsp.default_capabilities({
-    --   workspace,
-    --   offsetEncoding,
-    --   general,
-    -- })
-
-    local capabilities = require("blink.cmp").get_lsp_capabilities({
-      workspace = workspace,
-      offsetEncoding = offsetEncoding,
-      general = general,
-    })
+    capabilities = require("blink.cmp").get_lsp_capabilities(capabilities)
 
     -- LSP Servers
 
@@ -59,7 +50,7 @@ return {
           },
         },
       },
-      filetypes = { "javascript", "typescript", "vue" },
+      filetypes = { "javascript", "typescript", "vue", "typescriptreact" },
     })
 
     -- Vue3 LSP

@@ -24,6 +24,7 @@
       "displayName": "Default Debug Config",
       "description": "Default Debug build using Ninja generator",
       "inherits": ["base-default-gcc"],
+      "binaryDir": "${sourceDir}/build/debug-gcc",
       "cacheVariables": {
         "CMAKE_EXPORT_COMPILE_COMMANDS": true,
         "CMAKE_BUILD_TYPE": "Debug"
@@ -33,7 +34,7 @@
       "name": "vcpkg-debug-gcc",
       "inherits": ["default-debug-gcc"],
       "displayName": "VCPKG Debug Config",
-      "binaryDir": "${sourceDir}/build/gcc",
+      "binaryDir": "${sourceDir}/build/debug-gcc",
       "cacheVariables": {
         "CMAKE_TOOLCHAIN_FILE": "~/prog/vcpkg/scripts/buildsystems/vcpkg.cmake"
       }
@@ -43,6 +44,7 @@
       "displayName": "Default Release Config",
       "description": "Default Release build using Ninja generator",
       "inherits": ["base-default-gcc"],
+      "binaryDir": "${sourceDir}/build/release-gcc",
       "cacheVariables": {
         "CMAKE_BUILD_TYPE": "Release"
       }
@@ -52,6 +54,7 @@
       "displayName": "VCPKG Release Config",
       "description": "Default Release build using Ninja generator",
       "inherits": ["vcpkg-debug-gcc"],
+      "binaryDir": "${sourceDir}/build/release-gcc",
       "cacheVariables": {
         "CMAKE_BUILD_TYPE": "Release"
       }
