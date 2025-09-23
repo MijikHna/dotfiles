@@ -66,23 +66,23 @@ config.font = wezterm.font_with_fallback({
 -- config.window_background_image = os.getenv("HOME") .. "/.dotfiles/term-backgrounds/dec/AOA3-scaled.png"
 -- config.window_background_image_hsb = { brightness = 0.88 }
 -- config.window_background_image = os.getenv("HOME") .. "/.dotfiles/term-backgrounds/dec/AOA6.png"
--- config.window_background_image_hsb = { brightness = 0.36 }
--- config.window_background_image = os.getenv("HOME") .. "/.dotfiles/term-backgrounds/dec/BESTie.png"
--- config.window_background_image_hsb = { brightness = 0.50 }
+-- config.window_background_image_hsb = { brightness = 0.32 }
+config.window_background_image = os.getenv("HOME") .. "/.dotfiles/term-backgrounds/dec/BESTie.png"
+config.window_background_image_hsb = { brightness = 0.27 }
 -- config.window_background_image = os.getenv("HOME") .. "/.dotfiles/term-backgrounds/dec/red-velvet1.jpg"
 -- config.window_background_image_hsb = { brightness = 0.027 }
-config.window_background_image = os.getenv("HOME") .. "/.dotfiles/term-backgrounds/dec/red-velvet2.jpg"
-config.window_background_image_hsb = { brightness = 0.036 }
+-- config.window_background_image = os.getenv("HOME") .. "/.dotfiles/term-backgrounds/dec/red-velvet2.jpg"
+-- config.window_background_image_hsb = { brightness = 0.026 }
 -- config.window_background_image = os.getenv("HOME") .. "/.dotfiles/term-backgrounds/dec/sunmi1.png"
 -- config.window_background_image_hsb = { brightness = 0.31 }
 -- config.window_background_image = os.getenv("HOME") .. "/.dotfiles/term-backgrounds/dec/sunmi2.png"
--- config.window_background_image_hsb = { brightness = 0.32 }
+-- config.window_background_image_hsb = { brightness = 0.25 }
 -- config.window_background_image = os.getenv("HOME") .. "/Pictures/Wallpapers/Rescene/RESCENE-1.jpeg"
 -- config.window_background_image_hsb = { brightness = 0.016 }
 -- config.window_background_image = os.getenv("HOME") .. "/Pictures/Wallpapers/Rescene/RESCENE-2-darken.png"
 -- config.window_background_image_hsb = { brightness = 0.36 }
 -- config.window_background_image = os.getenv("HOME") .. "/Pictures/Wallpapers/4 minute/4minute-2_16-9.png"
--- config.window_background_image_hsb = { brightness = 0.38 }
+-- config.window_background_image_hsb = { brightness = 0.25 }
 -- config.window_background_image = os.getenv("HOME") .. "/Pictures/Wallpapers/4 minute/4minute-2_16-10.png"
 -- config.window_background_image_hsb = { brightness = 0.38 }
 

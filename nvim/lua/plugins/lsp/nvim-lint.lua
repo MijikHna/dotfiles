@@ -8,6 +8,8 @@ return {
       javascript = { "eslint" },
       typescript = { "eslint" },
       vue = { "eslint" },
+      react = { "eslint" },
+      typescriptreact = { "eslint" },
       python = { "ruff" },
     }
 

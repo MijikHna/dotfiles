@@ -1,0 +1,9 @@
+# NeoVim
+pynvim
+jupytext
+jupyter-client
+
+# Notebook
+notebook
+ipykernel
+

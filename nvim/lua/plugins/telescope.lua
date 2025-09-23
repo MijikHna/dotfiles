@@ -6,7 +6,7 @@ return {
       "nvim-tree/nvim-web-devicons",
       "nvim-telescope/telescope-live-grep-args.nvim",
     },
-    config = function()
+    config = function ()
       local telescope = require("telescope")
       local lga_actions = require("telescope-live-grep-args.actions")
       local actions = require("telescope.actions")
@@ -31,6 +31,9 @@ return {
             ".nuxt/",
             "%.jpg",
             "%.png",
+            "%.pdf",
+            "%.fls",
+            "%.aux",
             "package%-lock.json",
           },
           mappings = {
@@ -75,10 +78,10 @@ return {
             },
           },
           fzf = {
-            fuzzy = false, -- false will only do exact matching
+            fuzzy = false,                  -- false will only do exact matching
             override_generic_sorter = true, -- override the generic sorter
-            override_file_sorter = true, -- override the file sorter
-            case_mode = "smart_case", -- or "ignore_case" or "respect_case" the default case_mode is "smart_case"
+            override_file_sorter = true,    -- override the file sorter
+            case_mode = "smart_case",       -- or "ignore_case" or "respect_case" the default case_mode is "smart_case"
           },
         },
       })

@@ -46,16 +46,16 @@ command -v pipx &> /dev/null && pipx install virtualenv
   && rm "$tempfile"
 
 # Kitty
-[ ! -d ~/.confg/kitty ] && ln -sv ~/.dotfiles/kitty ~/.config/kitty || echo "kitty config already exists"
+# [ ! -d ~/.confg/kitty ] && ln -sv ~/.dotfiles/kitty ~/.config/kitty || echo "kitty config already exists"
 
 # Ghostty
-[ ! -d ~/.config/ghostty ] && ln -sv ~/.dotfiles/ghostty ~/.config/ghostty || echo "ghostty config already exists"
+# [ ! -d ~/.config/ghostty ] && ln -sv ~/.dotfiles/ghostty ~/.config/ghostty || echo "ghostty config already exists"
 
 # Yazi
 [ ! -d ~/.config/yazi ] && ln -sv ~/.dotfiles/yazi ~/.config/yazi || echo "yazi already exists"
 
-# Harleaquin
-[ ! -d ~/.config/harlequin ] && ln -sv ~/.dotfiles/harlequin ~/.config/harlequin || echo "harlequin already exists"
+# Presentterm
+# [ ! -d ~/.config/presentterm ] && ln -sv ~/.dotfiles/presentterm ~/.config/presenterm || echo "presenterm already exists"
 
 # Cheat Sheets
 [ ! -f ~/bin/cht ] && ln -sv ~/.dotfiles/scripts/cht.sh ~/bin/cht || echo "cht already exists"

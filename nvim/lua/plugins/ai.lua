@@ -2,7 +2,7 @@ return {
   {
     "github/copilot.vim",
     enabled = true,
-    config = function ()
+    config = function()
       local keymap = vim.keymap
 
       keymap.set("i", "<C-Q>", "copilot#Accept('\\<CR>')", { expr = true, replace_keycodes = false })
@@ -17,147 +17,142 @@ return {
     end,
   },
   {
-    "CopilotC-Nvim/CopilotChat.nvim",
-    event = "VeryLazy",
-    enabled = true,
-    branch = "main",
-    dependencies = {
-      "github/copilot.vim",
-    },
-    opts = {},
-    init = function ()
-      vim.keymap.set("n", "<leader>cct", ":CopilotChatToggle<CR><C-w>=")
-    end,
-  },
-  {
     "yetone/avante.nvim",
     enabled = false,
-    -- dev = true,
-    -- dir = os.getenv("CODING") .. "/Projects/Nvim Plugins/avante.nvim",
     event = "VeryLazy",
     build = "make",
     opts = {
+      instructions_file = "avante.md",
       provider = "copilot",
-      copilot = {
-        endpoint = "https://api.githubcopilot.com",
-        model = "gpt-4o-2024-05-13",
-        proxy = nil,            -- [protocol://]host[:port] Use this proxy
-        allow_insecure = false, -- Allow insecure server connections
-        timeout = 30000,        -- Timeout in milliseconds
-        temperature = 0,
-        max_tokens = 8192,
+      providers = {
+        copilot = {
+          endpoint = "https://api.githubcopilot.com",
+          model = "gpt-4o-2024-05-13",
+          proxy = nil,            -- [protocol://]host[:port] Use this proxy
+          allow_insecure = false, -- Allow insecure server connections
+          timeout = 30000,        -- Timeout in milliseconds
+          extra_request_body = {
+            max_tokens = 8192,
+            temperature = 0,
+          }
+        }
       },
+
+      file_selector = {
+        provider = "telescope",
+        provider_opts = {},
+      },
+      selector = {
+        provider = "native",
+        provider_opts = {},
+      },
+      input = {
+        provider = "dressing",
+        provider_opts = {},
+      },
+      shortcuts = {
+        {
+          name = "refactor",
+          description = "Refactor code with best practices",
+          details =
+          "Automatically refactor code to improve readability, maintainability, and follow best practices while preserving functionality",
+          prompt =
+          "Please refactor this code following best practices, improving readability and maintainability while preserving functionality."
+        },
+        {
+          name = "test",
+          description = "Generate unit tests",
+          details = "Create comprehensive unit tests covering edge cases, error scenarios, and various input conditions",
+          prompt = "Please generate comprehensive unit tests for this code, covering edge cases and error scenarios."
+        },
+        -- Add more custom shortcuts...
+      },
+      mappings = { sidebar = { close = { "q" } } },
+      windows = {
+        edit = { start_insert = true, },
+        ask = { start_insert = true },
+      },
+      behaviour = { enable_fastapply = true },
+      web_search_engine = {
+        provider = "tavily", -- tavily, serpapi, google, kagi, brave, or searxng
+        proxy = nil,         -- proxy support, e.g., http://127.0.0.1:7890
+      }
     },
     dependencies = {
-      "nvim-tree/nvim-web-devicons",
-      "stevearc/dressing.nvim",
       "nvim-lua/plenary.nvim",
       "MunifTanjim/nui.nvim",
+      "echasnovski/mini.pick",         -- for file_selector provider mini.pick
+      "nvim-telescope/telescope.nvim", -- for file_selector provider telescope
+      "stevearc/dressing.nvim",
+      "folke/snacks.nvim",             -- for input provider snacks
+      "nvim-tree/nvim-web-devicons",
+      "github/copilot.vim",
       {
         "MeanderingProgrammer/render-markdown.nvim",
         ft = { "markdown", "Avante" },
       },
+
     },
-  },
-  {
-    "robitx/gp.nvim",
-    enabled = true,
-    event = "VeryLazy",
-    config = function ()
-      local conf = {
-        providers = {
-          copilot = {
-            endpoint = "https://api.githubcopilot.com/chat/completions",
-            secret = {
-              "bash",
-              "-c",
-              "cat ~/.config/github-copilot/apps.json | sed -e 's/.*oauth_token...//;s/\".*//'",
-            },
-          },
-        },
-        agents = {
-          {
-            provider = "copilot",
-            name = "ChatCopilot",
-            chat = true,
-            command = false,
-            -- string with model name or table with model name and parameters
-            model = { model = "gpt-4o", temperature = 1.0, top_p = 1, n = 1 },
-            -- system prompt (use this to specify the persona/role of the AI)
-            system_prompt =
-            "Response must be short. Response must be casual. Response can have opinion. Response don't contain code, if not explicitly asked for code.",
-          },
-        },
-        hooks = {
-          Translator = function (gp, params)
-            local chat_system_prompt = "You are a Translator, please translate between English and Chinese."
-            gp.cmd.ChatNew(params, chat_system_prompt)
-          end,
-          -- example of adding command which writes unit tests for the selected code
-          UnitTests = function (gp, params)
-            local template = "I have the following code from {{filename}}:\n\n"
-              .. "```{{filetype}}\n{{selection}}\n```\n\n"
-              .. "Please respond by writing table driven unit tests for the code above."
-            local agent = gp.get_command_agent()
-            gp.Prompt(params, gp.Target.enew, agent, template)
-          end,
-          -- example of adding command which explains the selected code
-          Explain = function (gp, params)
-            local template = "I have the following code from {{filename}}:\n\n"
-              .. "```{{filetype}}\n{{selection}}\n```\n\n"
-              .. "Please respond by explaining the code above."
-            local agent = gp.get_chat_agent()
-            gp.Prompt(params, gp.Target.popup, agent, template)
-          end,
-          CodeReview = function (gp, params)
-            local template = "I have the following code from {{filename}}:\n\n"
-              .. "```{{filetype}}\n{{selection}}\n```\n\n"
-              .. "Please analyze for code smells and suggest improvements."
-            local agent = gp.get_chat_agent()
-            gp.Prompt(params, gp.Target.enew("markdown"), agent, template)
-          end,
-          -- TODO: grab a selection find Diagnostics in there and ask the question providing better context
-          FixDiagnostics = function (gp, params)
-            print()
-            local current_cursor_line = vim.api.nvim_win_get_cursor(0)[1] - 1
-            local lsp_diagnostics_errors = vim.diagnostic.get(0, { lnum = current_cursor_line })
-
-            if #lsp_diagnostics_errors > 0 then
-              local lsp_diagnostics_message = ""
-              for _, lsp_diagnostics_error in ipairs(lsp_diagnostics_errors) do
-                lsp_diagnostics_message = lsp_diagnostics_error.message
-                if lsp_diagnostics_error.severity == 1 then
-                  break
-                end
-              end
-              local template = "Please explain and fix following error: `"
-                .. lsp_diagnostics_message
-                .. "`"
-                .. " in following code\n\n"
-                .. "```{{filetype}}\n{{selection}}```"
-                .. "Please also print out thsi question."
-              local agent = gp.get_chat_agent()
-              print(template)
-              gp.Prompt(params, gp.Target.enew("markdown"), agent, template)
-            else
-              print("No diagnostics on this line.")
-            end
-          end,
-        },
-      }
-
-      require("gp").setup(conf)
-    end,
   },
   {
     "olimorris/codecompanion.nvim",
-    enabled = false,
+    enabled = true,
     dependencies = {
+      -- "github/copilot.vim",
       "nvim-lua/plenary.nvim",
       "nvim-treesitter/nvim-treesitter",
+      "ravitemer/codecompanion-history.nvim"
     },
     opts = {
-      adapters = { copilot = "copilot" },
+      strategies = {
+        chat = { adapter = "copilot" },
+        inline = { adapter = "copilot" },
+        cmd = { adapter = "copilot" }
+      },
+      collapse_tools = false,
+      extensions = {
+        history = {
+          enabled = true,
+          opts = {
+            keymap = "gh",
+            save_chat_keymap = "sc",
+            auto_save = false,
+            expiration_days = 15,
+            picker = "telescope", --- ("telescope", "snacks", "fzf-lua", or "default")
+            chat_filter = nil,    -- function(chat_data) return boolean end
+            picker_keymaps = {
+              rename = { n = "r", i = "<M-r>" },
+              delete = { n = "d", i = "<M-d>" },
+              duplicate = { n = "<C-y>", i = "<C-y>" },
+            },
+            auto_generate_title = false,
+            title_generation_opts = {
+              adapter = nil,               ---Adapter for generating titles (defaults to current chat adapter); "copilot"
+              model = nil,                 -- Model for generating titles (defaults to current chat model);"gpt-4o"
+              refresh_every_n_prompts = 0, ---Number of user prompts after which to refresh the title (0 to disable); e.g., 3 to refresh after every 3rd user prompt
+              max_refreshes = 3,           ---Maximum number of times to refresh the title (default: 3)
+              format_title = function(original_title)
+                return original_title      -- this can be a custom function that applies some custom, formatting to the title.
+              end
+            },
+            continue_last_chat = true,
+            delete_on_clearing_chat = false,
+            dir_to_save = vim.fn.stdpath("data") .. "/codecompanion-history",
+            enable_logging = false,
+          }
+        }
+      },
     },
+    init = function()
+      local keymap = vim.keymap
+
+      keymap.set({ "n", "v" }, "<leader>cct", "<cmd>CodeCompanionChat Toggle<CR>",
+        { desc = "[C]ode[C]ompanion [T]oggle" })
+      keymap.set({ "n", "v" }, "<leader>cca", "<cmd>CodeCompanionChat Add<CR>",
+        { desc = "[C]ode[C]ompanion [A]dd Selection" })
+      keymap.set({ "n", "v" }, "<leader>cci", "<cmd>CodeCompanion<CR>", { desc = "[C]ode[C]ompanion [I]nline Assistant" })
+      keymap.set({ "n", "v" }, "<leader>ccm", "<cmd>CodeCompanionActions<CR>",
+        { desc = "[C]ode[C]ompanion Action [M]enu" })
+    end
   },
 }

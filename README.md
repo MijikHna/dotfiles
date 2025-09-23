@@ -2,15 +2,14 @@
 
 Before Installation:
 
-
 0. `apt install build-essential`
 0. `bin` folders -> `mkdir ~/bin ~/.local/bin`
 
 1. pix -> `apt install pipx`
 2. nvm
     1. `curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/vX.X.X/install.sh | bash`
-    2. `nvm install 20`
-    3. `nvm use 20`
+    2. `nvm install XX`
+    3. `nvm use XX`
 
 3. tmux -> `apt install tmux`
 4. install nvim
@@ -18,12 +17,6 @@ Before Installation:
     2. `curl -L -o ~/prog/nvim/nvim.appimage https://github.com/neovim/neovim/releases/download/stable/nvim.appimage`
     3. `chmod ug+x ~/prog/nvim/nvim.appimage`
     4. `ln -sv ~/prog/nvim/nvim.appimage ~/bin/nvim`
-
-After Installation
-
-1. create `spell` folder in `.dotfiles/nvim`
-2. download spell file from <https://ftp.nluug.nl/pub/vim/runtime/spell/>
-3. move this file to `spell` folder
 
 ## Overview
 
@@ -35,15 +28,12 @@ After Installation
 
 - Zsh theme [p10k](https://github.com/romkatv/powerlevel10k)
 
-
 ### Nvim
-
 
 #### General
 
 ![Vim Cheat Sheet](http://www.viemu.com/vi-vim-cheat-sheet.gif)
 
 #### Plugins
-
 
 ## Tmux

@@ -57,3 +57,18 @@ vim.api.nvim_create_autocmd({ "BufRead", "BufNewFile" }, {
     end)
   end,
 })
+
+-- Auto Save
+local autosave_group = vim.api.nvim_create_augroup("AutoSaveOnBufLeave", { clear = true })
+
+vim.api.nvim_create_autocmd("BufLeave", {
+  group = autosave_group,
+  callback = function()
+    local bufnr = vim.api.nvim_get_current_buf()
+    if vim.api.nvim_get_option_value("modifiable", { buf = bufnr }) and vim.api.nvim_get_option_value("buftype", { buf = bufnr }) == "" then
+      if vim.api.nvim_get_option_value("modified", { buf = bufnr }) then
+        vim.cmd("write")
+      end
+    end
+  end,
+})

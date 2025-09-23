@@ -25,7 +25,6 @@ return {
           enable = false,
           open_win_config = { width = 170, height = 30, row = 10, col = 75 },
         },
-        -- hide_root_folder = false,
         side = "right",
         number = false,
         relativenumber = false,

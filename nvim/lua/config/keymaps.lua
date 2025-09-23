@@ -48,3 +48,9 @@ keymap.set("i", "C-i", "<Esc>ea", { desc = "Leave insert mode and move cursor to
 keymap.set({ "n" }, "<leader>dD", '"_dd', { desc = "Delete line without overwriting clipboard", noremap = true })
 keymap.set({ "n", "v" }, "<leader>D", '"_D', { desc = "Delete line without overwriting clipboard", noremap = true })
 keymap.set({ "v" }, "<leader>d", '"_d', { desc = "Delete without overwriting clipboard", noremap = true })
+
+
+-- vim.cmd([[ command! -nargs=* Help vertical help <args> ]])
+-- vim.api.nvim_create_user_command('help', function(opts)
+--   vim.cmd('vertical help ' .. opts.args)
+-- end, { nargs = '?' })
