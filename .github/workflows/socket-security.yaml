@@ -17,10 +17,8 @@ jobs:
 
       - name: Install Dependencies
         run: |
-          pwd
           npm install -g socket
           cd ./scripts/socket-security
-          pwd
           pip install .
 
       - name: Run Socket scan
@@ -36,6 +34,7 @@ jobs:
       - name: Show Report
         shell: bash
         run: |
+          pwd
           python scripts/socket-security/socket_security/fetch_report.py
         env:
           SOCKET_SECURITY_API_KEY: ${{ secrets.SOCKET_API_TOKEN }}

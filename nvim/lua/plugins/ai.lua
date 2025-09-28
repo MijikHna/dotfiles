@@ -115,7 +115,7 @@ return {
           enabled = true,
           opts = {
             keymap = "gh",
-            save_chat_keymap = "sc",
+            save_chat_keymap = "<leader>ccs",
             auto_save = false,
             expiration_days = 15,
             picker = "telescope", --- ("telescope", "snacks", "fzf-lua", or "default")
@@ -153,6 +153,7 @@ return {
       keymap.set({ "n", "v" }, "<leader>cci", "<cmd>CodeCompanion<CR>", { desc = "[C]ode[C]ompanion [I]nline Assistant" })
       keymap.set({ "n", "v" }, "<leader>ccm", "<cmd>CodeCompanionActions<CR>",
         { desc = "[C]ode[C]ompanion Action [M]enu" })
+      keymap.set({ "n", "v" }, "<leader>cch", "<cmd>CodeCompanionHistory<CR>", { desc = "[C]ode[C]ompanion [H]istory" })
     end
   },
 }
