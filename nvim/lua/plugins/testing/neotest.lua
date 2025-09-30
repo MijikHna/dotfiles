@@ -18,7 +18,7 @@ return {
           python = ".venv/bin/python",
           runner = "pytest",
           pytest_discover_instances = true,
-          args = { "--log-level", "DEBUG" }
+          args = { "-s" },
         }),
         require("neotest-gtest"),
       },

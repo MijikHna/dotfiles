@@ -15,5 +15,9 @@ NOTES.md
 
 *backup.*
 *.backup
+backup/
 
 **dec/
+errors/
+not-used/
+*.env

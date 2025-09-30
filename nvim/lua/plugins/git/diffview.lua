@@ -14,5 +14,7 @@ return {
 
     keymap.set("n", "<leader>gh", ":DiffviewOpen<CR>", { noremap = true, silent = true })
     keymap.set("n", "<leader>gc", ":DiffviewClose<CR>", { noremap = true, silent = true })
+    keymap.set("n", "<leader>dvt", ":DiffviewToggleFiles<CR>", { noremap = true, silent = true })
+    keymap.set("n", "<leader>dvf", ":DiffviewFocusFiles<CR>", { noremap = true, silent = true })
   end
 }

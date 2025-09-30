@@ -31,6 +31,7 @@ return {
             ".nuxt/",
             "%.jpg",
             "%.png",
+            "%.pdf",
             "%.so",
             "%.pyx",
             "package%-lock%.json",

@@ -1,6 +1,7 @@
 return {
   "romgrk/barbar.nvim",
   dependencies = { "nvim-tree/nvim-web-devicons" },
+  event = "VeryLazy",
   config = function()
     require("barbar").setup()
 
@@ -18,5 +19,6 @@ return {
     keymap.set("n", "<leader>bcc", "<cmd>BufferCloseAllButCurrent<CR>", { desc = "[B]uffer [C]lose All but [C]urrent" })
     keymap.set("n", "<leader>bcl", "<cmd>BufferCloseBuffersLeft<CR>", { desc = "[B]uffer [C]lose all to the [L]eft" })
     keymap.set("n", "<leader>bcr", "<cmd>BufferCloseBuffesRight<CR>", { desc = "[B]uffer [C]lose to the [R]ight" })
+    keymap.set("n", "<leader>bcv", "<cmd>BufferCloseAllButVisible<CR>", { desc = "[B]uffer [C]lose but [V]isible" })
   end,
 }

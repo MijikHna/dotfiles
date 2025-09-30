@@ -21,11 +21,6 @@ require("lazy").setup({
   { import = "plugins.lsp" },
   { import = "plugins.testing" },
 }, {
-  change_detection = {
-    notify = false,
-  },
-  checker = {
-    enable = false,
-    notify = false,
-  },
+  change_detection = { notify = false },
+  checker = { enable = false, notify = false },
 })
