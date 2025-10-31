@@ -12,7 +12,7 @@ return {
       enable_line_number = false,
       blacklist = {
         ".env",
-        "/media/" .. os.getenv("ME") .. "/WindowsD/vaults/KnowledgeBase",
+        "/media/" .. os.getenv("ME") .. "/WindowsD/vaults/KeyNotes",
         "/media/" .. os.getenv("ME") .. "/WindowsD/vaults/CheatSheets",
         "/media/" .. os.getenv("ME") .. "/WindowsD/vaults/CourseNotes",
         os.getenv("HOME") .. "/Desktop/WEEKLY VIM LEARNING",

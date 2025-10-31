@@ -20,15 +20,6 @@ api.nvim_create_autocmd({ "BufNewFile", "BufRead" }, {
   end,
 })
 
--- NOTE: if cpp/hpp file is part of an Ardunio project should be processes by arduino-language-server
--- api.nvim_create_autocmd({ "BufNewFile", "BufRead" }, {
---   pattern = { "*.cpp", "*.hpp" },
---   callback = function(opts)
---     -- print(vim.inspect(opts))
---   end
--- })
---
-
 local conceallevel_markdown_group = api.nvim_create_augroup("ConcealLevelMarkdown", { clear = true })
 api.nvim_create_autocmd({ "BufNewFile", "BufRead" }, {
   group = conceallevel_markdown_group,
@@ -57,6 +48,24 @@ vim.api.nvim_create_autocmd({ "BufRead", "BufNewFile" }, {
     end)
   end,
 })
+
+-- vim.cmd("highlight default link EnvVarKeyCurrent Visual")
+--
+-- -- Store match id so we can clear previous highlight
+-- local env_var_current_match_id = nil
+--
+-- vim.api.nvim_create_autocmd({ "CursorMoved" }, {
+--   pattern = { ".env", "*.env", ".env.*" },
+--   group = env_group,
+--   callback = function()
+--     local line = vim.fn.line('.')
+--     -- Remove previous syntax match for current line
+--     vim.cmd([[
+--       syntax clear EnvVarKeyCurrent
+--       syntax match EnvVarKeyCurrent /\%%%dl.*=/ conceal off contains=EnvVarKey oneline
+--     ]])
+--   end,
+-- })
 
 -- Auto Save
 local autosave_group = vim.api.nvim_create_augroup("AutoSaveOnBufLeave", { clear = true })

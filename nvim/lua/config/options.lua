@@ -78,3 +78,6 @@ opt.pumblend = 5
 
 opt.sessionoptions = "blank,buffers,curdir,tabpages,winsize,winpos,terminal,localoptions,folds"
 opt.laststatus = 3
+
+vim.g.loaded_netrw = 1
+vim.g.loaded_netrwPlugin = 1

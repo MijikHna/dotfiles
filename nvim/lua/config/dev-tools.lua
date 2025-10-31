@@ -9,11 +9,13 @@ end
 
 R = function(name)
   RELOAD(name)
+  package.loaded[name] = nil
   return require(name)
 end
 
 RELOAD_DEBUG = function(name)
   require("plenary.reload").reload_module(name)
+  package.loaded[name] = nil
   return require(name)
 end
 

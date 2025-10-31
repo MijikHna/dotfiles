@@ -148,9 +148,6 @@ local function create_cpp_project()
   --  └── .clang-format
   --]]
   local dotfiles_path = Path:new(os.getenv("HOME") .. "../.dotfiles")
-
-  -- vim.print(vim.inspect(dotfiles_path))
-
   local cpp_project_path = Path:new(".")
   local cpp_project_splitted_path = vim.split(cpp_project_path:absolute(), "/")
   local cpp_project_name = cpp_project_splitted_path[#cpp_project_splitted_path]

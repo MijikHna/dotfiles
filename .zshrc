@@ -189,7 +189,7 @@ unset __conda_setup
 # PRIVATE VIM MODE
 export EDITOR="vim -u ~/.vimrcprivate"
 
-export TERM="wezterm"
+[[ -n "${GHOSTTY_BIN_DIR}" ]] && export TERM="xterm-ghostty" || export TERM="xterm-256color"
 
 # NVM
 export NVM_DIR="$HOME/.nvm"

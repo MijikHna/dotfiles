@@ -171,8 +171,8 @@ return {
       end,
     },
     sources = {
-      default = { "lsp", "avante", "snippets", "path", "buffer" },
-      -- default = { "lsp", "snippets", "path", "buffer" },
+      -- default = { "lsp", "avante", "snippets", "path", "buffer" },
+      default = { "lsp", "snippets", "path", "buffer" },
       providers = {
         cmdline = { min_keyword_length = 0, },
         lsp = {
@@ -237,11 +237,11 @@ return {
           module = "render-markdown.integ.blink",
           fallbacks = { "lsp" },
         },
-        avante = {
-          module = 'blink-cmp-avante',
-          name = 'Avante',
-          opts = {}
-        },
+        -- avante = {
+        --   module = 'blink-cmp-avante',
+        --   name = 'Avante',
+        --   opts = {}
+        -- },
       },
       per_filetype = {
         ["dap-repl"] = { "dap", "path" },

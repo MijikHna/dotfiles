@@ -46,16 +46,16 @@ config.font = wezterm.font_with_fallback({
   --   weight = "Regular",
   --   harfbuzz_features = { "calt=0", "clig=0", "liga=0" },
   -- },
-  {
-    family = "FiraCode Nerd Font Mono",
-    weight = "Regular",
-    harfbuzz_features = { "calt=0", "clig=0", "liga=0" },
-  },
   -- {
-  --   family = "M+1 Code Nerd Font Mono",
+  --   family = "FiraCode Nerd Font Mono",
   --   weight = "Regular",
   --   harfbuzz_features = { "calt=0", "clig=0", "liga=0" },
   -- },
+  {
+    family = "M+1 Code Nerd Font Mono",
+    weight = "Regular",
+    harfbuzz_features = { "calt=0", "clig=0", "liga=0" },
+  },
   -- {
   --   family = "RecMonoCasual Nerd Font",
   --   weight = "Regular",
@@ -67,16 +67,16 @@ config.font = wezterm.font_with_fallback({
 -- config.window_background_image_hsb = { brightness = 0.88 }
 -- config.window_background_image = os.getenv("HOME") .. "/.dotfiles/term-backgrounds/dec/AOA6.png"
 -- config.window_background_image_hsb = { brightness = 0.32 }
-config.window_background_image = os.getenv("HOME") .. "/.dotfiles/term-backgrounds/dec/BESTie.png"
-config.window_background_image_hsb = { brightness = 0.27 }
+-- config.window_background_image = os.getenv("HOME") .. "/.dotfiles/term-backgrounds/dec/BESTie.png"
+-- config.window_background_image_hsb = { brightness = 0.27 }
 -- config.window_background_image = os.getenv("HOME") .. "/.dotfiles/term-backgrounds/dec/red-velvet1.jpg"
 -- config.window_background_image_hsb = { brightness = 0.027 }
 -- config.window_background_image = os.getenv("HOME") .. "/.dotfiles/term-backgrounds/dec/red-velvet2.jpg"
 -- config.window_background_image_hsb = { brightness = 0.026 }
 -- config.window_background_image = os.getenv("HOME") .. "/.dotfiles/term-backgrounds/dec/sunmi1.png"
 -- config.window_background_image_hsb = { brightness = 0.31 }
--- config.window_background_image = os.getenv("HOME") .. "/.dotfiles/term-backgrounds/dec/sunmi2.png"
--- config.window_background_image_hsb = { brightness = 0.25 }
+config.window_background_image = os.getenv("HOME") .. "/.dotfiles/term-backgrounds/dec/sunmi2.png"
+config.window_background_image_hsb = { brightness = 0.45 }
 -- config.window_background_image = os.getenv("HOME") .. "/Pictures/Wallpapers/Rescene/RESCENE-1.jpeg"
 -- config.window_background_image_hsb = { brightness = 0.016 }
 -- config.window_background_image = os.getenv("HOME") .. "/Pictures/Wallpapers/Rescene/RESCENE-2-darken.png"
@@ -92,7 +92,7 @@ config.window_padding = {
   right = 0,
 }
 
-config.font_size = 10
+config.font_size = 12
 
 config.hide_tab_bar_if_only_one_tab = true
 

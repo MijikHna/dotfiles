@@ -21,13 +21,28 @@ return {
     enabled = false,
     event = "VeryLazy",
     build = "make",
+    dependencies = {
+      "nvim-lua/plenary.nvim",
+      "MunifTanjim/nui.nvim",
+      "echasnovski/mini.pick",         -- for file_selector provider mini.pick
+      "nvim-telescope/telescope.nvim", -- for file_selector provider telescope
+      "stevearc/dressing.nvim",
+      "folke/snacks.nvim",             -- for input provider snacks
+      "nvim-tree/nvim-web-devicons",
+      "github/copilot.vim",
+      {
+        "MeanderingProgrammer/render-markdown.nvim",
+        ft = { "markdown", "Avante" },
+      },
+
+    },
     opts = {
       instructions_file = "avante.md",
       provider = "copilot",
       providers = {
         copilot = {
           endpoint = "https://api.githubcopilot.com",
-          model = "gpt-4o-2024-05-13",
+          -- model = "gpt-4o-2024-05-13",
           proxy = nil,            -- [protocol://]host[:port] Use this proxy
           allow_insecure = false, -- Allow insecure server connections
           timeout = 30000,        -- Timeout in milliseconds
@@ -78,21 +93,6 @@ return {
         proxy = nil,         -- proxy support, e.g., http://127.0.0.1:7890
       }
     },
-    dependencies = {
-      "nvim-lua/plenary.nvim",
-      "MunifTanjim/nui.nvim",
-      "echasnovski/mini.pick",         -- for file_selector provider mini.pick
-      "nvim-telescope/telescope.nvim", -- for file_selector provider telescope
-      "stevearc/dressing.nvim",
-      "folke/snacks.nvim",             -- for input provider snacks
-      "nvim-tree/nvim-web-devicons",
-      "github/copilot.vim",
-      {
-        "MeanderingProgrammer/render-markdown.nvim",
-        ft = { "markdown", "Avante" },
-      },
-
-    },
   },
   {
     "olimorris/codecompanion.nvim",
@@ -107,7 +107,8 @@ return {
       strategies = {
         chat = { adapter = "copilot" },
         inline = { adapter = "copilot" },
-        cmd = { adapter = "copilot" }
+        cmd = { adapter = "copilot" },
+        keymaps = { clear = { modes = { n = "gC" } } }
       },
       collapse_tools = false,
       extensions = {
@@ -146,7 +147,7 @@ return {
     init = function()
       local keymap = vim.keymap
 
-      keymap.set({ "n", "v" }, "<leader>cct", "<cmd>CodeCompanionChat Toggle<CR>",
+      keymap.set({ "n", "v" }, "<leader>cct", "<cmd>CodeCompanionChat Toggle<CR>|:w=<CR>",
         { desc = "[C]ode[C]ompanion [T]oggle" })
       keymap.set({ "n", "v" }, "<leader>cca", "<cmd>CodeCompanionChat Add<CR>",
         { desc = "[C]ode[C]ompanion [A]dd Selection" })

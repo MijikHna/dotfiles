@@ -1,4 +1,49 @@
-font-family = FiraCode Nerd Font Mono
-font-size = 10
-font-features = -calt -liga -dlig
+# font-family = RecMonoCasual Nerd Font
+font-family= M+1 Code Nerd Font Mono
+# font-family = FiraCode Nerd Font Mono
+# font-family = Inconsolata LGC Font Mono
+# font-family = IosevkaTerm Nerd Font Mono
+# font-family = RecMonoLinear Nerd Font Mono
 
+font-size = 12
+font-feature = -calt, -liga, -dlig
+
+theme = Cobalt2
+background = black
+foreground = white
+font-thicken = true
+cursor-color = white
+cursor-text = black
+cursor-opacity = 0.7
+window-colorspace = display-p3
+
+window-show-tab-bar = auto
+
+# cursor-style = block, bar, underline, block_hollow
+cursor-style = block
+
+window-padding-balance = true
+
+background-blur = 20
+background-opacity = 2.0
+
+# background-image = ../term-backgrounds/dec/AOA3-scaled.png
+# background-image-opacity = 0.58
+
+# background-image = ../term-backgrounds/dec/BESTie.png
+# background-image-opacity = 0.35
+
+# background-image = ../term-backgrounds/dec/red-velvet2.jpg
+# background-image-opacity = 0.027
+
+# background-image = ../term-backgrounds/dec/AOA6.png
+# background-image-opacity = 0.5
+
+# background-image = ../term-backgrounds/dec/brave-girls1.png
+# background-image-opacity = 1.0
+
+background-image = ../term-backgrounds/dec/sunmi2.png
+background-image-opacity = 0.38
+
+# background-image-fit = contain, cover, stretch, none
+background-image-fit = cover
