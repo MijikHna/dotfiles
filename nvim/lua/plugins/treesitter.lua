@@ -9,13 +9,6 @@ return {
   config = function()
     local parser_config = require("nvim-treesitter.parsers").get_parser_configs()
 
-    parser_config.latex = {
-      install_info = {
-        url = os.getenv("HOME") .. "/prog/tree-sitter/tree-sitter-latex",
-        files = { "src/parser.c", "src/scanner.c" },
-      },
-    }
-
     require("nvim-treesitter.configs").setup({
       ensure_installed = {
         "arduino",
@@ -31,7 +24,6 @@ return {
         "jsdoc",
         "json",
         "json5",
-        "latex",
         "lua",
         "make",
         "markdown",
