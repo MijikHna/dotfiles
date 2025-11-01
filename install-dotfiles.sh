@@ -49,7 +49,7 @@ command -v pipx &> /dev/null && pipx install virtualenv
 # [ ! -d ~/.confg/kitty ] && ln -sv ~/.dotfiles/kitty ~/.config/kitty || echo "kitty config already exists"
 
 # Ghostty
-# [ ! -d ~/.config/ghostty ] && ln -sv ~/.dotfiles/ghostty ~/.config/ghostty || echo "ghostty config already exists"
+[ ! -d ~/.config/ghostty ] && ln -sv ~/.dotfiles/ghostty ~/.config/ghostty || echo "ghostty config already exists"
 
 # Yazi
 [ ! -d ~/.config/yazi ] && ln -sv ~/.dotfiles/yazi ~/.config/yazi || echo "yazi already exists"

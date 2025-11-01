@@ -12,7 +12,6 @@ return {
       auto_restore_last_session = false,
       allowed_dirs = {
         "~/.dotfiles",
-        "/media/" .. os.getenv("ME") .. "/WindowsD/vaults/*",
       },
       close_filetypes_on_save = { "checkhealth", "codecompanion", "NvimTree"},
       git_use_branch_name = true,
