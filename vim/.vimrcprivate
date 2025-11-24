@@ -1,7 +1,5 @@
 "PLUGINS ----------------------------- {{{
 call plug#begin('~/.vim/plugged')
-  " Color Scheme
-  Plug 'morhetz/gruvbox', {'do': 'cp -rf  ~/.vim/plugged/gruvbox/colors/gruvbox.vim ~/.vim/colors/' }
 call plug#end()
 " }}}
 
@@ -21,7 +19,7 @@ filetype plugin on
 " Theme
 set termguicolors
 set background=dark
-colorscheme gruvbox
+colorscheme industry
 
 " Status Line
 

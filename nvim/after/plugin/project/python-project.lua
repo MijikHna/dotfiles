@@ -101,6 +101,48 @@ local function create_main_py(current_dir)
     return
   end
 end
+
+local function create_pyproject_toml(project_name)
+  local pyproject_toml, error = io.open("pyproject.toml", "w")
+
+  if not pyproject_toml then
+    vim.notify("Error: Could not open pyproject.toml", levels.WARN)
+    return
+  end
+
+
+  local quoted_deps = {
+    '    # Testing',
+    '    "pytest",',
+    '    # Notebooks',
+    '    "pynvim",',
+    '    "jupytext",',
+    '    "notebook",',
+    '    "ipykernel",',
+    '    "jupyter-client"'
+  }
+  local deps_str = table.concat(quoted_deps, '\n')
+
+  local toml_content = string.format([[
+[project]
+name = "%s"
+version = "0.1.0"
+description = ""
+dependencies = [
+%s
+]
+[build-system]
+requires = ["hatchling>=1.0.0"]
+build-backend = "hatchling.build"
+
+[tool.pyright]
+venvPath = "."
+venv = ".venv"
+]], project_name, deps_str)
+
+  pyproject_toml:write(toml_content)
+  pyproject_toml:close()
+end
 local function create_python_project()
   --[[
   -- ROOT/
@@ -109,6 +151,7 @@ local function create_python_project()
   -- ├── pyrightconfig.json
   -- ├── README.md
   -- ├── requirements.txt
+  -- ├── pyproject.toml
   --]]
   --
   local python_project_path = Path:new(".")
@@ -130,10 +173,11 @@ local function create_python_project()
   -- create files
   create_conftest_py()
   create_src_init_py(project_src_folder_name)
-  write_to_pyrightconfig()
+  -- write_to_pyrightconfig()
   write_to_readme_md(project_name)
-  write_to_requirements_txt()
+  -- write_to_requirements_txt()
   create_main_py(python_project_path:absolute())
+  create_pyproject_toml(project_name)
 
   vim.cmd("NvimTreeRefresh")
 end

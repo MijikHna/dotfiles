@@ -29,7 +29,8 @@ return {
       strategies = {
         chat = { adapter = "copilot" },
         inline = { adapter = "copilot" },
-        cmd = { adapter = "copilot" }
+        cmd = { adapter = "copilot" },
+        keymaps = { clear = { modes = { n = "gC" } } }
       },
       collapse_tools = false,
       extensions = {
@@ -68,7 +69,7 @@ return {
     init = function()
       local keymap = vim.keymap
 
-      keymap.set({ "n", "v" }, "<leader>cct", "<cmd>CodeCompanionChat Toggle<CR>",
+      keymap.set({ "n", "v" }, "<leader>cct", "<cmd>CodeCompanionChat Toggle<CR>|:w=<CR>",
         { desc = "[C]ode[C]ompanion [T]oggle" })
       keymap.set({ "n", "v" }, "<leader>cca", "<cmd>CodeCompanionChat Add<CR>",
         { desc = "[C]ode[C]ompanion [A]dd Selection" })

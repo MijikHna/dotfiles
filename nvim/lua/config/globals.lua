@@ -9,11 +9,13 @@ end
 
 R = function(name)
   RELOAD(name)
+  package.loaded[name] = nil
   return require(name)
 end
 
 RELOAD_DEBUG = function(name)
   require("plenary.reload").reload_module(name)
+  package.loaded[name] = nil
   return require(name)
 end
 
@@ -30,4 +32,8 @@ end, {
   desc = 'Reload a Lua module and return it'
 })
 
-vim.keymap.set({ "n" }, "rlp", "<cmd>PlenaryButstedFile", { desc = "[Run] Test in Current Buffer for [L]ua [P]luging" })
+vim.keymap.set(
+  { "n" },
+  "<leader>rlp", "<cmd>PlenaryButstedFile",
+  { desc = "[Run] Test in Current Buffer for [L]ua [P]luging" }
+)
