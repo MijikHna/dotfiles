@@ -1,11 +1,11 @@
 # font-family = RecMonoCasual Nerd Font
-font-family= M+1 Code Nerd Font Mono
+# font-family= M+1 Code Nerd Font Mono
 # font-family = FiraCode Nerd Font Mono
 # font-family = Inconsolata LGC Font Mono
-# font-family = IosevkaTerm Nerd Font Mono
+font-family = IosevkaTerm Nerd Font Mono
 # font-family = RecMonoLinear Nerd Font Mono
 
-font-size = 12
+font-size = 13
 font-feature = -calt, -liga, -dlig
 
 theme = Cobalt2
@@ -42,7 +42,7 @@ background-opacity = 2.0
 # background-image = ../term-backgrounds/dec/brave-girls1.png
 # background-image-opacity = 1.0
 
-background-image = ../term-backgrounds/dec/sunmi2.png
+background-image = ../theme/term-backgrounds/dec/sunmi2.png
 background-image-opacity = 0.38
 
 # background-image-fit = contain, cover, stretch, none

@@ -4,8 +4,14 @@ return {
     enhanced_diff_hl = true,
     use_icons = true,
     view = {
-      default = { layout = "diff2_horizontal" },
-      merge_tool = { layout = "diff3_horizontal" },
+      default = {
+        layout = "diff2_horizontal",
+        disable_diagnostics = true
+      },
+      merge_tool = {
+        layout = "diff4_mixed",
+        disable_diagnostics = true
+      },
     },
   },
   config = true,

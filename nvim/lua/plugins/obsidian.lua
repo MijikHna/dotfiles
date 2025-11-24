@@ -8,10 +8,9 @@ return {
   },
   opts = {
     workspaces = {
-      { name = "course-notes", path = os.getenv("OBSIDIAN_VAULTS") .. "/CourseNotes" },
       { name = "cheat-sheets", path = os.getenv("OBSIDIAN_VAULTS") .. "/CheatSheets" },
-      { name = "wiederholen", path = os.getenv("OBSIDIAN_VAULTS") .. "/Wiederholen" },
-      { name = "keynotes", path = os.getenv("OBSIDIAN_VAULTS") .. "/KeyNotes" },
+      { name = "wiederholen",  path = os.getenv("OBSIDIAN_VAULTS") .. "/Wiederholen" },
+      { name = "keynotes",     path = os.getenv("OBSIDIAN_VAULTS") .. "/KeyNotes" },
     },
     mappings = {
       -- Overrides the 'gf' mapping to work on markdown/wiki links within your vault.

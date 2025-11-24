@@ -73,7 +73,7 @@ return {
       playground = {
         enable = true,
         disable = {},
-        updatetime = 25, -- Debounced time for highlighting nodes in the playground from source code
+        updatetime = 25,         -- Debounced time for highlighting nodes in the playground from source code
         persist_queries = false, -- Whether the query persists across vim sessions
         keybindings = {
           toggle_query_editor = "o",
@@ -105,6 +105,14 @@ return {
     vim.api.nvim_create_autocmd({ "BufRead", "BufNewFile" }, {
       pattern = "*.tcss",
       command = "set filetype=css",
+    })
+
+    vim.api.nvim_create_autocmd({ "InsertLeave" }, {
+      callback = function()
+        vim.schedule(function()
+          vim.cmd("silent! normal! zx")
+        end)
+      end
     })
   end,
 }

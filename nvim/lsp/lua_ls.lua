@@ -25,5 +25,9 @@ return {
       }
     },
   },
-  capabilities = lsp_settings.capabilities
+  capabilities = vim.tbl_deep_extend("force", lsp_settings.capabilities, {
+    textDocument = {
+      foldingRange = nil,
+    },
+  })
 }

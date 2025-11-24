@@ -1,10 +1,8 @@
-basedpyright==1.31.4,
 cmake-language-server==0.1.11,
 ninja==1.13.0,
 pylatexenc==2.10,
-ruff==0.13.0,
-tldr==3.4.1,
-virtualenv==20.34.0,
+ruff==0.14.2,
+tldr==3.4.3,
 debugpy==1.8.12
 pynvim==latest
 jupytext==latest
