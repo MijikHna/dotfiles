@@ -14,7 +14,7 @@ return {
         "~/.dotfiles",
         "/media/" .. os.getenv("ME") .. "/WindowsD/vaults/*",
       },
-      close_filetypes_on_save = { "checkhealth", "codecompanion", "NvimTree"},
+      close_filetypes_on_save = { "checkhealth", "codecompanion", "NvimTree" },
       git_use_branch_name = true,
       git_auto_restore_on_branch_change = true,
       show_auto_restore_notif = true,

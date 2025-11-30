@@ -5,7 +5,7 @@
 font-family = IosevkaTerm Nerd Font Mono
 # font-family = RecMonoLinear Nerd Font Mono
 
-font-size = 13
+font-size = 12
 font-feature = -calt, -liga, -dlig
 
 theme = Cobalt2

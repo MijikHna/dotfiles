@@ -27,7 +27,7 @@ return {
   },
   capabilities = vim.tbl_deep_extend("force", lsp_settings.capabilities, {
     textDocument = {
-      foldingRange = nil,
+      foldingRange = { dynamicRegistration = false, lineFoldingOnly = true },
     },
-  })
+  }),
 }

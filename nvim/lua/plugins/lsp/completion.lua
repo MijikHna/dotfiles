@@ -174,7 +174,7 @@ return {
       -- default = { "lsp", "avante", "snippets", "path", "buffer" },
       default = { "lsp", "snippets", "path", "buffer" },
       providers = {
-        cmdline = { min_keyword_length = 0, },
+        cmdline = { min_keyword_length = 1, },
         lsp = {
           name = "LSP",
           module = "blink.cmp.sources.lsp",

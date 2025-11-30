@@ -88,14 +88,12 @@ return {
         ask = { start_insert = true },
       },
       behaviour = { enable_fastapply = true },
-      web_search_engine = {
-        provider = "tavily", -- tavily, serpapi, google, kagi, brave, or searxng
-        proxy = nil,         -- proxy support, e.g., http://127.0.0.1:7890
-      }
+      web_search_engine = { provider = "tavily" }, -- tavily, serpapi, google, kagi, brave, or searxng proxy = nil; proxy support, e.g., http://127.0.0.1:7890
     },
   },
   {
     "olimorris/codecompanion.nvim",
+    version = "v17.33.0",
     enabled = true,
     dependencies = {
       -- "github/copilot.vim",
@@ -147,14 +145,26 @@ return {
     init = function()
       local keymap = vim.keymap
 
-      keymap.set({ "n", "v" }, "<leader>cct", "<cmd>CodeCompanionChat Toggle<CR>|:w=<CR>",
-        { desc = "[C]ode[C]ompanion [T]oggle" })
-      keymap.set({ "n", "v" }, "<leader>cca", "<cmd>CodeCompanionChat Add<CR>",
-        { desc = "[C]ode[C]ompanion [A]dd Selection" })
-      keymap.set({ "n", "v" }, "<leader>cci", "<cmd>CodeCompanion<CR>", { desc = "[C]ode[C]ompanion [I]nline Assistant" })
-      keymap.set({ "n", "v" }, "<leader>ccm", "<cmd>CodeCompanionActions<CR>",
-        { desc = "[C]ode[C]ompanion Action [M]enu" })
-      keymap.set({ "n", "v" }, "<leader>cch", "<cmd>CodeCompanionHistory<CR>", { desc = "[C]ode[C]ompanion [H]istory" })
+      keymap.set(
+        { "n", "v" }, "<leader>cct", "<cmd>CodeCompanionChat Toggle<CR>|:wincmd =<CR>",
+        { desc = "[C]ode[C]ompanion [T]oggle" }
+      )
+      keymap.set(
+        { "n", "v" }, "<leader>cca", "<cmd>CodeCompanionChat Add<CR>",
+        { desc = "[C]ode[C]ompanion [A]dd Selection" }
+      )
+      keymap.set(
+        { "n", "v" }, "<leader>cci", "<cmd>CodeCompanion<CR>",
+        { desc = "[C]ode[C]ompanion [I]nline Assistant" }
+      )
+      keymap.set(
+        { "n", "v" }, "<leader>ccm", "<cmd>CodeCompanionActions<CR>",
+        { desc = "[C]ode[C]ompanion Action [M]enu" }
+      )
+      keymap.set(
+        { "n", "v" }, "<leader>cch", "<cmd>CodeCompanionHistory<CR>",
+        { desc = "[C]ode[C]ompanion [H]istory" }
+      )
     end
   },
 }

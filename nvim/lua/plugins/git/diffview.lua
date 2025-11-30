@@ -1,5 +1,6 @@
 return {
   "sindrets/diffview.nvim",
+  enabled = true,
   opts = {
     enhanced_diff_hl = true,
     use_icons = true,
@@ -14,7 +15,6 @@ return {
       },
     },
   },
-  config = true,
   init = function()
     local keymap = vim.keymap
 

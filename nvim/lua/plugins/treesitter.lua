@@ -110,6 +110,14 @@ return {
     vim.api.nvim_create_autocmd({ "InsertLeave" }, {
       callback = function()
         vim.schedule(function()
+          local no_fold_filetypes = { "codecompanion" }
+
+          for _, filetype in ipairs(no_fold_filetypes) do
+            if vim.bo.filetype == filetype then
+              return
+            end
+          end
+
           vim.cmd("silent! normal! zx")
         end)
       end
