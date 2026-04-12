@@ -93,10 +93,10 @@ return {
   },
   {
     "olimorris/codecompanion.nvim",
-    version = "v17.33.0",
+    -- version = "v17.33.0",
     enabled = true,
     dependencies = {
-      -- "github/copilot.vim",
+      "github/copilot.vim",
       "nvim-lua/plenary.nvim",
       "nvim-treesitter/nvim-treesitter",
       "ravitemer/codecompanion-history.nvim"
@@ -109,14 +109,19 @@ return {
         keymaps = { clear = { modes = { n = "gC" } } }
       },
       collapse_tools = false,
+      interactions = {
+        chat = { adapter = "copilot" },
+        inline = { adapter = "copilot" },
+        cmd = { adapter = "copilot" },
+      },
       extensions = {
         history = {
           enabled = true,
           opts = {
             keymap = "gh",
             save_chat_keymap = "<leader>ccs",
-            auto_save = false,
-            expiration_days = 15,
+            auto_save = true,
+            expiration_days = 30,
             picker = "telescope", --- ("telescope", "snacks", "fzf-lua", or "default")
             chat_filter = nil,    -- function(chat_data) return boolean end
             picker_keymaps = {
@@ -124,19 +129,17 @@ return {
               delete = { n = "d", i = "<M-d>" },
               duplicate = { n = "<C-y>", i = "<C-y>" },
             },
-            auto_generate_title = false,
+            auto_generate_title = true,
             title_generation_opts = {
-              adapter = nil,               ---Adapter for generating titles (defaults to current chat adapter); "copilot"
+              adapter = "copilot",         ---Adapter for generating titles (defaults to current chat adapter); "copilot"
               model = nil,                 -- Model for generating titles (defaults to current chat model);"gpt-4o"
               refresh_every_n_prompts = 0, ---Number of user prompts after which to refresh the title (0 to disable); e.g., 3 to refresh after every 3rd user prompt
               max_refreshes = 3,           ---Maximum number of times to refresh the title (default: 3)
-              format_title = function(original_title)
-                return original_title      -- this can be a custom function that applies some custom, formatting to the title.
-              end
+              format_title = function(original_title) return original_title end
             },
             continue_last_chat = true,
             delete_on_clearing_chat = false,
-            dir_to_save = vim.fn.stdpath("data") .. "/codecompanion-history",
+            dir_to_save = vim.fn.stdpath("data") .. "/codecompanion-history", -- ~/.local/share/nvim
             enable_logging = false,
           }
         }

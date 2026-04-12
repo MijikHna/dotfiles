@@ -1,7 +1,7 @@
 local keymap = vim.keymap
 
-vim.g.mapleader = " "
-vim.g.maplocalleader = ","
+-- vim.g.mapleader = " "
+-- vim.g.maplocalleader = "-"
 
 keymap.set("n", "<leader><CR>", "o<ESC>", { desc = "Add new line in normal mode" })
 keymap.set("n", "<leader>nh", ":nohlsearch<CR>", { desc = "Clear search highlights" })

@@ -27,6 +27,7 @@ vim.api.nvim_create_user_command('ReloadDebug', function(opts)
 
   vim.notify("Reloading " .. opts.args)
   RELOAD_DEBUG(opts.args)
+  vim.notify("Reloaded " .. opts.args)
 end, {
   nargs = 1,
   desc = 'Reload a Lua module and return it'
@@ -34,6 +35,6 @@ end, {
 
 vim.keymap.set(
   { "n" },
-  "<leader>rlp", "<cmd>PlenaryButstedFile",
+  "<leader>rnt", "<cmd>PlenaryButstedFile",
   { desc = "[Run] Test in Current Buffer for [L]ua [P]luging" }
 )

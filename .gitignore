@@ -1,5 +1,5 @@
-/nvim/plugged/
-/nvim/undodir/
+**/plugged/
+**/undodir/
 
 /vim/.vim/plugged/
 /vim/.vim/undodir/

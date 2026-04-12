@@ -17,7 +17,7 @@ return {
       "nvim-treesitter/nvim-treesitter",
     },
     config = true,
-    opts = { file_type = { "markdown", "Avante", "copilot-chat", "codecompanion" } },
+    opts = { file_type = { "markdown", "Avante", "copilot-chat" } },
   },
   {
     "3rd/image.nvim",

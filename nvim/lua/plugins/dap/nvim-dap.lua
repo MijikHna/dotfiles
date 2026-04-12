@@ -41,9 +41,9 @@ return {
       id = "cppdbg",
       type = "executable",
       command = os.getenv("HOME")
-        .. "/.vscode/extensions/"
-        .. vscode_util.find_vscode_cpptools()
-        .. "/debugAdapters/bin/OpenDebugAD7",
+          .. "/.vscode/extensions/"
+          .. vscode_util.find_vscode_cpptools()
+          .. "/debugAdapters/bin/OpenDebugAD7",
       options = { detached = false },
     }
 
@@ -62,11 +62,11 @@ return {
       }
     end
 
-    require("dap.ext.vscode").load_launchjs(".nvim/launch.json", {
-      ["pwa-node"] = { "javascript", "typescript", "vue" },
-      ["pwa-chrome"] = { "javascript", "typescript", "vue" },
-      cppdbg = { "cpp", "c" },
-    })
+    -- require("dap.ext.vscode").load_launchjs(".nvim/launch.json", {
+    --   ["pwa-node"] = { "javascript", "typescript", "vue" },
+    --   ["pwa-chrome"] = { "javascript", "typescript", "vue" },
+    --   cppdbg = { "cpp", "c" },
+    -- })
 
     require("nvim-dap-virtual-text").setup({})
 
@@ -90,12 +90,10 @@ return {
 
     keymap.set("n", "<leader>dB", dap.toggle_breakpoint, { desc = "Toggle breackpoint", noremap = true })
     keymap.set("n", "<leader>db", ":PBToggleBreakpoint<CR>", { desc = "Toggle breackpoint and keep", noremap = true })
-    keymap.set("n", "<leader>dPa", function()
-      dap.set_exception_breakpoints({ "all" })
-    end, { desc = "Set all exception breakpoints", noremap = true })
-    keymap.set("n", "<leader>dPb", function()
-      dap.set_exception_breakpoints(vim.fn.input("Breakpoint condition: "))
-    end, { desc = "Set exception breakpoint with condition", noremap = true })
+    keymap.set("n", "<leader>dPa", function() dap.set_exception_breakpoints({ "all" }) end,
+      { desc = "Set all exception breakpoints", noremap = true })
+    keymap.set("n", "<leader>dPb", function() dap.set_exception_breakpoints(vim.fn.input("Breakpoint condition: ")) end,
+      { desc = "Set exception breakpoint with condition", noremap = true })
     keymap.set("n", "<leader>dPc", function()
       dap.set_exception_breakpoints(nil, nil, vim.fn.input("Log point message: "))
     end, { desc = "Set log point", noremap = true })
@@ -108,9 +106,8 @@ return {
     keymap.set("n", "<leader>dk", dap.up, { desc = "Up", noremap = true })
     keymap.set("n", "<leader>dj", dap.down, { desc = "Down", noremap = true })
     keymap.set("n", "<leader>dd", dap.disconnect, { desc = "Disconnect", noremap = true })
-    keymap.set("n", "<leader>dD", function()
-      dap.disconnect({ restart = false, terminateDebugee = false })
-    end, { desc = "Disconnect and keep", noremap = true })
+    keymap.set("n", "<leader>dD", function() dap.disconnect({ restart = false, terminateDebugee = false }) end,
+      { desc = "Disconnect and keep", noremap = true })
 
     keymap.set("n", "<leader>dr", function()
       dap.repl.open({}, "vsplit")

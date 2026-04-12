@@ -1,0 +1,5 @@
+require("config.keymaps")
+require("config.options")
+require("config.dev-tools")
+require("config.autocmds")
+require("config.lsp")
