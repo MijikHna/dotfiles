@@ -62,11 +62,11 @@ return {
       }
     end
 
-    -- require("dap.ext.vscode").load_launchjs(".nvim/launch.json", {
-    --   ["pwa-node"] = { "javascript", "typescript", "vue" },
-    --   ["pwa-chrome"] = { "javascript", "typescript", "vue" },
-    --   cppdbg = { "cpp", "c" },
-    -- })
+    require("dap.ext.vscode").load_launchjs(".vscode/launch.json", {
+      ["pwa-node"] = { "javascript", "typescript", "vue" },
+      ["pwa-chrome"] = { "javascript", "typescript", "vue" },
+      cppdbg = { "cpp", "c" },
+    })
 
     require("nvim-dap-virtual-text").setup({})
 

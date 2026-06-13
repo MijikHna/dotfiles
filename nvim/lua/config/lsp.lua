@@ -3,7 +3,7 @@ vim.lsp.enable("lua_ls")
 
 vim.lsp.enable("ts_ls") -- npm
 -- vim.lsp.enable("vue_ls") -- npm
--- vim.lsp.enable("vtsls")
+vim.lsp.enable("vtsls")
 
 vim.lsp.enable("clangd")
 vim.lsp.enable("cmake")   -- pip

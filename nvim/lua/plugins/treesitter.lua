@@ -42,55 +42,8 @@ return {
       "vue",
       "yaml",
     }
+
     require('nvim-treesitter').install(ensure_installed)
-
-    -- local parser_config = require("nvim-treesitter.parsers").get_parser_configs()
-    -- parser_config.latex = {
-    --   install_info = {
-    --     url = os.getenv("HOME") .. "/prog/tree-sitter/tree-sitter-latex",
-    --     files = { "src/parser.c", "src/scanner.c" },
-    --   },
-    -- }
-
-    -- require("nvim-treesitter.configs").setup({
-    --   sync_install = false,
-    --   ignore_install = { "all" },
-    --   highlight = {
-    --     enable = true,
-    --     additional_vim_regex_highlighting = false,
-    --   },
-    --   indent = { enanble = true },
-    --   autotag = {
-    --     enable = true,
-    --   },
-    --   interactive_selection = {
-    --     enable = true,
-    --     keymaps = {
-    --       init_selection = "gnn",
-    --       node_incremental = "grn",
-    --       scope_incremental = false,
-    --       node_decremental = "grm",
-    --     },
-    --   },
-    --   playground = {
-    --     enable = true,
-    --     disable = {},
-    --     updatetime = 25,         -- Debounced time for highlighting nodes in the playground from source code
-    --     persist_queries = false, -- Whether the query persists across vim sessions
-    --     keybindings = {
-    --       toggle_query_editor = "o",
-    --       toggle_hl_groups = "i",
-    --       toggle_injected_languages = "t",
-    --       toggle_anonymous_nodes = "a",
-    --       toggle_language_display = "I",
-    --       focus_language = "f",
-    --       unfocus_language = "F",
-    --       update = "R",
-    --       goto_node = "<cr>",
-    --       show_help = "?",
-    --     },
-    --   },
-    -- })
 
     require("treesitter-context").setup()
 
@@ -98,7 +51,6 @@ return {
       pattern = ensure_installed,
       callback = function()
         vim.treesitter.start()
-        vim.print("FileType")
 
         vim.wo[0][0].foldexpr = 'v:lua.vim.treesitter.foldexpr()'
         vim.wo[0][0].foldmethod = 'expr'

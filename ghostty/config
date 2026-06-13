@@ -42,8 +42,12 @@ background-opacity = 2.0
 # background-image = ../term-backgrounds/dec/brave-girls1.png
 # background-image-opacity = 1.0
 
-background-image = ../theme/term-backgrounds/dec/sunmi2.png
-background-image-opacity = 0.38
+# background-image = ../theme/term-backgrounds/dec/sunmi2.png
+# background-image-opacity = 0.38
 
 # background-image-fit = contain, cover, stretch, none
-background-image-fit = cover
+# background-image-fit = cover
+
+window-save-state = never
+# cursor-style-blink = false
+# linux-cgroup = false

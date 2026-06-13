@@ -78,6 +78,7 @@ opt.pumblend = 5
 
 opt.sessionoptions = "blank,buffers,curdir,tabpages,winsize,winpos,terminal,localoptions,folds"
 opt.laststatus = 3
+-- opt.showtabline = 2
 
 opt.autochdir = false
 

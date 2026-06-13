@@ -31,5 +31,9 @@ require("lazy").setup({
     { import = "plugins.testing" },
     { import = "plugins.web" },
   },
-  checker = { enabled = true },
+  checker = { enabled = false },
+  change_detection = {
+    enabled = false,
+    notify = true,
+  },
 })

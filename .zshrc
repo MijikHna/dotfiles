@@ -211,3 +211,8 @@ find_man() {
 
 guifg= #54546d guibg=#16161d
 
+
+# Added by LM Studio CLI (lms)
+export PATH="$PATH:/home/kirill/.lmstudio/bin"
+# End of LM Studio CLI section
+

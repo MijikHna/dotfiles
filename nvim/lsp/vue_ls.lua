@@ -6,7 +6,7 @@ return {
   root_markers = { "package.json" },
   init_options = {
     typescript = {
-      tsdk = os.getenv("HOME") .. "/.nvm/versions/node/v22.17.0/lib/node_modules/typescript/lib"
+      tsdk = os.getenv("HOME") .. "/.nvm/versions/node/v24.13.0/lib/node_modules/typescript/lib"
     },
     vue = { hybridMode = false }
   },
