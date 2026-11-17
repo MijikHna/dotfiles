@@ -1,94 +1,110 @@
+local selected_model = {
+  model = "nvidia/nemotron-3-nano-omni-30b-a3b-reasoning:free",
+  provider = "nvidia"
+}
+
+local get_open_router_api_key = function()
+  local key_path = vim.fn.expand("~/secrets/openrouter")
+  local file = io.open(key_path, "r")
+
+  if file then
+    local key = vim.trim(file:read("*a"))
+    vim.env.OPENROUTER_API_KEY = key
+    file:close()
+
+    return key
+  else
+    vim.notify("OpenRouter API key file not found at: " .. key_path, vim.log.levels.WARN)
+  end
+end
+
+get_open_router_api_key()
+
 return {
   {
-    "github/copilot.vim",
-    enabled = true,
-    config = function()
-      local keymap = vim.keymap
-
-      keymap.set("i", "<C-Q>", "copilot#Accept('\\<CR>')", { expr = true, replace_keycodes = false })
-
-      keymap.set("i", "<C-F>", "<Plug>(copilot-accept-word)")
-      keymap.set("i", "<C-G>", "<Plug>(copilot-accept-line)")
-
-      vim.g.copilot_filetypes = { markdown = true, DressingInput = false }
-      vim.g.copilot_no_tab_map = true
-
-      vim.cmd("Copilot disable")
-    end,
-  },
-  {
     "yetone/avante.nvim",
-    enabled = false,
-    event = "VeryLazy",
     build = "make",
+    enabled = true,
+    event = "VeryLazy",
+    version = false,
+    opts = {
+      instructions_file = "avante.md",
+      provider = "openrouter",
+      providers = {
+        openrouter = {
+          __inherited_from = "openai",
+          endpoint = "https://openrouter.ai/api/v1",
+          api_key_name = "OPENROUTER_API_KEY",
+          model = selected_model.model,
+          timeout = 30000,
+          extra_request_body = {
+            max_tokens = nil,
+            sync = true,
+            allow_fallbacks = false,
+            require_parameters = false,
+            data_collection = false,
+          },
+        },
+      },
+      behavior = {
+        auto_suggestions = false,
+        auto_scroll = true,
+        auto_scroll_delay = 100,
+        auto_scroll_threshold = 0.9,
+        auto_scroll_speed = 1,
+        show_token_usage = true,
+        auto_approve_tool_permissions = false,
+        auto_add_current_file = false,
+        auto_apply_diff_after_generation = false,
+      },
+      windows = {
+        position = "right",
+        -- wrap = true,
+        width = 40,
+      },
+      history = {
+        enabled = true,
+        auto_save = true,
+        expiration_days = 30,
+        dir_to_save = vim.fn.stdpath("data") .. "/avante-history",
+      },
+      web_search_enginge = nil,
+    },
     dependencies = {
       "nvim-lua/plenary.nvim",
       "MunifTanjim/nui.nvim",
-      "echasnovski/mini.pick",         -- for file_selector provider mini.pick
+      { "ColinKennedy/mega.cmdparse", dependencies = { "ColinKennedy/mega.logging" } },
+      "nvim-mini/mini.pick",           -- for file_selector provider mini.pick
       "nvim-telescope/telescope.nvim", -- for file_selector provider telescope
-      "stevearc/dressing.nvim",
+      "hrsh7th/nvim-cmp",              -- autocompletion for avante commands and mentions
+      "ibhagwan/fzf-lua",              -- for file_selector provider fzf
       "folke/snacks.nvim",             -- for input provider snacks
-      "nvim-tree/nvim-web-devicons",
-      "github/copilot.vim",
+      "nvim-tree/nvim-web-devicons",   -- or echasnovski/mini.icons
       {
-        "MeanderingProgrammer/render-markdown.nvim",
+        -- support for image pasting
+        "HakonHarnes/img-clip.nvim",
+        event = "VeryLazy",
+        opts = {
+          -- recommended settings
+          default = {
+            embed_image_as_base64 = false,
+            prompt_for_file_name = false,
+            drag_and_drop = { insert_mode = true },
+            use_absolute_path = true,
+          },
+        },
+      },
+      {
+        -- Make sure to set this up properly if you have lazy=true
+        'MeanderingProgrammer/render-markdown.nvim',
+        opts = {
+          file_types = {
+            "markdown",
+            "markdown.Avante" -- until a fix for https://github.com/MeanderingProgrammer/render-markdown.nvim/issues/715 is found
+          },
+        },
         ft = { "markdown", "Avante" },
       },
-
-    },
-    opts = {
-      instructions_file = "avante.md",
-      provider = "copilot",
-      providers = {
-        copilot = {
-          endpoint = "https://api.githubcopilot.com",
-          -- model = "gpt-4o-2024-05-13",
-          proxy = nil,            -- [protocol://]host[:port] Use this proxy
-          allow_insecure = false, -- Allow insecure server connections
-          timeout = 30000,        -- Timeout in milliseconds
-          extra_request_body = {
-            max_tokens = 8192,
-            temperature = 0,
-          }
-        }
-      },
-
-      file_selector = {
-        provider = "telescope",
-        provider_opts = {},
-      },
-      selector = {
-        provider = "native",
-        provider_opts = {},
-      },
-      input = {
-        provider = "dressing",
-        provider_opts = {},
-      },
-      shortcuts = {
-        {
-          name = "refactor",
-          description = "Refactor code with best practices",
-          details =
-          "Automatically refactor code to improve readability, maintainability, and follow best practices while preserving functionality",
-          prompt =
-          "Please refactor this code following best practices, improving readability and maintainability while preserving functionality."
-        },
-        {
-          name = "test",
-          description = "Generate unit tests",
-          details = "Create comprehensive unit tests covering edge cases, error scenarios, and various input conditions",
-          prompt = "Please generate comprehensive unit tests for this code, covering edge cases and error scenarios."
-        },
-        -- Add more custom shortcuts...
-      },
-      mappings = { sidebar = { close = { "q" } } },
-      windows = {
-        edit = { start_insert = true, },
-        ask = { start_insert = true },
-      },
-      behaviour = { enable_fastapply = true },
-      web_search_engine = { provider = "tavily" }, -- tavily, serpapi, google, kagi, brave, or searxng proxy = nil; proxy support, e.g., http://127.0.0.1:7890
     },
   },
   {
@@ -103,16 +119,66 @@ return {
     },
     opts = {
       strategies = {
-        chat = { adapter = "copilot" },
-        inline = { adapter = "copilot" },
-        cmd = { adapter = "copilot" },
+        chat = {
+          adapter = {
+            name = "openrouter",
+            model = selected_model.model,
+            provider = selected_model.provider,
+            max_tokens = nil,
+          }
+        },
+        inline = {
+          adapter = {
+            name = "openrouter",
+            model = selected_model,
+            provider = selected_model.provider
+          }
+        },
+        cmd = {
+          adapter = {
+            name = "openrouter",
+            model = selected_model,
+            provider = selected_model.provider,
+          }
+        },
         keymaps = { clear = { modes = { n = "gC" } } }
       },
       collapse_tools = false,
+      adapters = {
+        http = {
+          openrouter = function()
+            return require("codecompanion.adapters").extend("openrouter", {
+              env = {
+                api_key = "file:~/secrets/openrouter",
+                -- url = "http://salvatore:8080"
+              },
+              headers = {
+                ["Content-Type"] = "application/json",
+                ["Authorization"] = "Bearer ${api_key}",
+              },
+              parameters = { sync = true },
+              schema = {
+                model = {
+                  default = selected_model,
+                  -- choices = function() return fetch_openrouter_models() end,
+                },
+                provider = {
+                  allow_fallbacks = false,
+                  require_parameters = false,
+                  data_collection = false,
+                },
+              },
+            })
+          end,
+          opts = {
+            show_model_choices = true,
+          },
+        },
+      },
       interactions = {
-        chat = { adapter = "copilot" },
-        inline = { adapter = "copilot" },
-        cmd = { adapter = "copilot" },
+        chat = { adapter = { name = "openrouter" } },
+        inline = { adapter = { name = "openrouter" } },
+        cmd = { adapter = { name = "openrouter" } },
       },
       extensions = {
         history = {
@@ -144,6 +210,11 @@ return {
           }
         }
       },
+      display = {
+        chat = {
+          show_settings = false
+        }
+      }
     },
     init = function()
       local keymap = vim.keymap

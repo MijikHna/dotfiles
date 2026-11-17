@@ -15,6 +15,7 @@ return {
         "/media/" .. os.getenv("ME") .. "/WindowsD/vaults/KeyNotes",
         "/media/" .. os.getenv("ME") .. "/WindowsD/vaults/CheatSheets",
         "/media/" .. os.getenv("ME") .. "/WindowsD/vaults/CourseNotes",
+        "/run/media/" .. os.getenv("ME") .. "/B4A0FA9AA0FA6272/vaults/KeyNotes",
         os.getenv("HOME") .. "/Desktop/WEEKLY VIM LEARNING",
         os.getenv("HOME") .. "/.dotfiles",
       },

@@ -27,26 +27,26 @@ window-padding-balance = true
 background-blur = 20
 background-opacity = 2.0
 
-# background-image = ../term-backgrounds/dec/AOA3-scaled.png
+# background-image = ../theme/term-backgrounds/dec/AOA3-scaled.png
 # background-image-opacity = 0.58
 
-# background-image = ../term-backgrounds/dec/BESTie.png
-# background-image-opacity = 0.35
+background-image = ../theme/term-backgrounds/dec/BESTie.png
+background-image-opacity = 0.32
 
-# background-image = ../term-backgrounds/dec/red-velvet2.jpg
+# background-image = ../theme/term-backgrounds/dec/red-velvet2.jpg
 # background-image-opacity = 0.027
 
-# background-image = ../term-backgrounds/dec/AOA6.png
+# background-image = ../theme/term-backgrounds/dec/AOA6.png
 # background-image-opacity = 0.5
 
-# background-image = ../term-backgrounds/dec/brave-girls1.png
+# background-image = ../theme/term-backgrounds/dec/brave-girls1.png
 # background-image-opacity = 1.0
 
 # background-image = ../theme/term-backgrounds/dec/sunmi2.png
 # background-image-opacity = 0.38
 
 # background-image-fit = contain, cover, stretch, none
-# background-image-fit = cover
+background-image-fit = stretch
 
 window-save-state = never
 # cursor-style-blink = false

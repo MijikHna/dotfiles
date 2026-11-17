@@ -11,8 +11,8 @@ function M.get_arduino_board_fqbn()
   local board_fqbn = ""
 
   for line in sketch_yaml:lines() do
-    if line:sub(1, #"default_fqbn:") == "default_fqbn:" then
-      board_fqbn = line:sub(#"default_fqbn:" + 2)
+    if line:sub(1, #"fqbn:") == "fqbn:" then
+      board_fqbn = line:sub(#"fqbn:" + 2)
       break
     end
   end
